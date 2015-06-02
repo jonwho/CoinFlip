@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<!--*************************** 
+ * UCSD CSE 134B SP15
+ * Authors: Andrew Wang
+ *          Jonathan Ho
+ *          Long Tran
+ * DATE: May 31st, 2015
+ ***************************-->
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Team Three / Dream Team">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="../js/Chart.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/team3.js"></script>
+
+    <title>Home - CoinFlip</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        /* Checks for authetication. If no authentication, sends to index.html
+           for authentication process */
+        var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+        var authData = ref.getAuth();
+        if(authData){
+
+        } else {    
+            document.location = "../index.html";
+        }
+        loadTopNavPersist();</script>
+    <script type="text/javascript">loadSideNav(0);</script>
+
+    <section class="main-section">
+
+
+        <section class="coin_wrapper">
+            <section class="overview-panel">
+                <section class="total-value">
+                    <div class="total-dollars">$----.--</div>
+                    <div class="total-change pos-change"></div><br/>
+                    <div class="total-label">My Total Coin Value</div>
+                </section>
+                <section class="mobile-toggle">
+                    <div class="mobile-toggle-button mtb-1 mobile-toggle-selected">
+                        <svg class="icon icon-menu">
+                            <symbol id="icon-menu" viewBox="0 0 1024 1024">
+                                <title>menu</title>
+                                <path class="path1" d="M128 768h768v-85.333h-768v85.333zM128 554.667h768v-85.333h-768v85.333zM128 256v85.333h768v-85.333h-768z"></path>
+                            </symbol>
+                            <use xlink:href="#icon-menu"></use>
+                        </svg>
+                    </div>
+                    <div class="mobile-toggle-button mtb-2">
+                        <svg class="icon icon-graph">
+                            <symbol id="icon-graph" viewBox="0 -200 1424 1424">
+                                <title>graph</title>
+                                <path class="path1" d="M704 256h-192v640h192v-640zM960 448h-192v448h192v-448zM64 960v-128h64v-64h-64v-128h64v-64h-64v-128h64v-64h-64v-128h64v-64h-64v-128h64v-64h-128v1024h1024v-64h-960zM448 576h-192v320h192v-320z"></path>
+                            </symbol>
+                            <use xlink:href="#icon-graph"></use>
+                        </svg>
+                    </div>
+                </section>
+                <section class="market-status">
+                    <div class="market-open"></div>
+                    <div class="market-time"></div>
+                </section>
+                <section class="market-list">
+
+                    <a href="wire3_g.html">
+                        <section class="market-item-header">
+                            Gold
+                            <svg class="icon icon-play-arrow">
+                                <symbol id="icon-play-arrow1" viewBox="0 0 1024 1024">
+                                    <title>play-arrow</title>
+                                    <path class="path1" d="M341.333 213.333v597.333l469.333-298.667z"></path>
+                                </symbol>
+                                <use xlink:href="#icon-play-arrow1"></use>
+                            </svg>
+                        </section>
+                    </a>
+                    <section class="market-item-stats">
+                        <table>
+                            <tr>
+                                <td id="gbid">--.--</td>
+                                <td id="gask">--.--</td>
+                                <td id="gchange" class="pos-change">+--.--</td>
+                            </tr>                    
+                            <tr>
+                                <td>Bid</td>
+                                <td>Ask</td>
+                                <td>Change</td>
+                            </tr>
+                        </table>
+                    </section>
+
+
+                    <a href="wire3_s.html">
+                        <section class="market-item-header">
+                            Silver
+                            <svg class="icon icon-play-arrow">
+                                <symbol id="icon-play-arrow2" viewBox="0 0 1024 1024">
+                                    <title>play-arrow</title>
+                                    <path class="path1" d="M341.333 213.333v597.333l469.333-298.667z"></path>
+                                </symbol>
+                                <use xlink:href="#icon-play-arrow2"></use>
+                            </svg>
+                        </section>
+                    </a>
+                    <section class="market-item-stats">
+                        <table>
+                            <tr>
+                                <td id="sbid">--.--</td>
+                                <td id="sask">--.--</td>
+                                <td id="schange" class="pos-change">+--.--</td>
+                            </tr>                    
+                            <tr>
+                                <td>Bid</td>
+                                <td>Ask</td>
+                                <td>Change</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <a href="wire3_p.html">
+                        <section class="market-item-header">
+                            Platinum
+                            <svg class="icon icon-play-arrow">
+                                <symbol id="icon-play-arrow3" viewBox="0 0 1024 1024">
+                                    <title>play-arrow</title>
+                                    <path class="path1" d="M341.333 213.333v597.333l469.333-298.667z"></path>
+                                </symbol>
+                                <use xlink:href="#icon-play-arrow3"></use>
+                            </svg>
+                        </section>
+                    </a>
+                    <section class="market-item-stats">
+                        <table>
+                            <tr>
+                                <td id='pbid'>--.--</td>
+                                <td id='pask'>--.--</td>
+                                <td id='pchange' class="pos-change">+--.--</td>
+                            </tr>                    
+                            <tr>
+                                <td>Bid</td>
+                                <td>Ask</td>
+                                <td>Change</td>
+                            </tr>
+                        </table>
+                    </section>
+                </section>
+            </section>
+
+            <section class="graph-panel">
+                <section class="chart-legend">
+                    <div class="legend-left-half">
+                        <section class="legend-item">
+                            <div class="legend-item-color" id="legend-1"></div>
+                            Gold Total
+                        </section>
+                        <section class="legend-item">
+                            <div class="legend-item-color" id="legend-2"></div>
+                            Platinum Total
+                        </section>            
+                        <section class="legend-item">
+                            <div class="legend-item-color" id="legend-3"></div>
+                            Silver Total (x70)
+                        </section>  
+                    </div>
+                </section>
+
+                <section class="range-option-table">
+                    <table style="width:100%">
+                        <tr>
+                            <td class="range-option" onclick="getAggregateData(getWeekBack()[1],getWeekBack()[0], true)"> 5 days </td>
+                            <td class="range-option" onclick="getAggregateData(getMonthBack()[1],getMonthBack()[0], true)"> 1 month </td>
+                            <td class="range-option" onclick="getAggregateData(getThreeMonthBack()[1], getThreeMonthBack()[0], true)"> 3 months </td>
+                            <td class="range-option-end" onclick="getAggregateData(getYearBack()[1], getYearBack()[0], true)"> 1 year </td>
+                        </tr>
+                    </table>
+                </section>
+                <div class="chart-y-label">PRICE</div>
+                <div class="chart-x-label">TIME</div>
+                <section class="chart-wrap">
+                    <canvas id="total-chart"></canvas>
+                </section>
+
+            </section>
+        </section>
+
+    </section>
+
+    <script type="text/javascript">
+
+        loadFooter(); 
+
+        /**************************************
+         * updateMarketStatus() :
+         *
+         * Function used to track a timer for COMEX business hours
+         */
+        function updateMarketStatus(){
+            var currTime = new Date();
+            var openTime = (new Date()).setHours(05, 20, 00, 0);
+            var closeTime = (new Date()).setHours(10, 30, 00, 0);
+
+            // Account for weekends
+            if(currTime.getDay() == 6 || currTime.getDay() == 0){
+                $('.market-open').html("Market is closed");
+                $('.market-time').html("");
+            } else { // Weekday logic
+                if(currTime > openTime && currTime < closeTime){
+                    $('.market-open').html("Market is open");
+                    var secondsLeft = Math.round((closeTime - currTime)/1000);
+                    var hours = parseInt(secondsLeft / 3600) % 24;
+                    var minutes = parseInt(secondsLeft / 60) % 60;
+                    var seconds = secondsLeft % 60;
+                    $('.market-time').html("<i>" + hours.toString() + 
+                            "h" + minutes.toString() 
+                            + "m" + seconds.toString() 
+                            + "s before close <i>");
+                } else {
+                    $('.market-open').html("Market is closed");
+                    $('.market-time').html("");
+
+                }
+            }
+        }
+        updateMarketStatus();
+
+        // Keep timer on during weekdays. Futile during weekends
+        if((new Date()).getDay() != 6 && (new Date()).getDay() != 0){
+            setInterval(updateMarketStatus, 1000);
+        }
+
+        // Populate live feed!
+        retrieveCurrentMetalsPrices(['GC.CMX', 'SI.CMX', 'PLM15.NYM']);
+
+        // Recurring updates of live feed
+        setInterval(function(){retrieveCurrentMetalsPrices(['GC.CMX', 'SI.CMX', 'PLM15.NYM']);}, 10000);
+        
+        /**************************************
+         * receiveAggregateData(data) :
+         *
+         * Callback of aggregate data to graph aggregated data
+         *  - data: data to be graphed
+         */
+        function receiveAggregateData(data){
+            drawGraph(data);
+        }
+        /**************************************
+         * updateLiveFields(sync) :
+         * 
+         * Update fields of live feed to reflect changes:
+         *  - sync: data that syncs to feed
+         */
+        function updateLiveFields(sync){
+            // Update gold
+            document.getElementById("gbid").innerHTML = sync['GC.CMX']['bid'];
+            document.getElementById("gask").innerHTML = sync['GC.CMX']['ask'];
+            document.getElementById("gchange").innerHTML = sync['GC.CMX']['change'];
+            (sync['GC.CMX']['change'].substring(0,1) == '+') ? 
+                    document.getElementById("gchange").setAttribute("class", "pos-change") 
+                    : document.getElementById("gchange").setAttribute("class", "neg-change")
+            
+            // Update silver
+            document.getElementById("sbid").innerHTML = sync['SI.CMX']['bid'];
+            document.getElementById("sask").innerHTML = sync['SI.CMX']['ask'];
+            document.getElementById("schange").innerHTML = sync['SI.CMX']['change'];
+            (sync['SI.CMX']['change'].substring(0,1) == '+') ? document.getElementById("schange").setAttribute("class", "pos-change") : document.getElementById("schange").setAttribute("class", "neg-change")
+
+            // Update platinum
+            document.getElementById("pbid").innerHTML = sync['PLM15.NYM']['bid'];
+            document.getElementById("pask").innerHTML = sync['PLM15.NYM']['ask'];
+            document.getElementById("pchange").innerHTML = sync['PLM15.NYM']['change'];
+            (sync['PLM15.NYM']['change'].substring(0,1) == '+') ? document.getElementById("pchange").setAttribute("class", "pos-change") : document.getElementById("pchange").setAttribute("class", "neg-change")
+
+            // Query firebase for data on coins to provide overview data
+            new Firebase("https://cse134bteam3.firebaseio.com")
+                        .child("users")
+                        .child((new Firebase("https://cse134bteam3.firebaseio.com")).getAuth().uid)
+                        .on("value", function(data){ 
+                // Calculate portfolio change based on proportion of portfolio allocated to metals
+                var overall_change;
+                var total_priceS = 0.0;
+                if('silver' in data.val()){
+                    for(itemIter in data.val()['silver']){
+                        total_priceS = total_priceS + parseFloat(data.val()['silver'][itemIter]['price']) 
+                                * parseFloat(data.val()['silver'][itemIter]['qty']);;
+                    }   
+                }
+                var total_priceG = 0.0;
+                if('gold' in data.val()){
+                    for(itemIter in data.val()['gold']){
+                        total_priceG = total_priceG + parseFloat(data.val()['gold'][itemIter]['price'])*parseFloat(data.val()['gold'][itemIter]['qty']);;
+                    }   
+                }
+                var total_priceP = 0.0;
+                if('platinum' in data.val()){
+                    for(itemIter in data.val()['platinum']){
+                        total_priceP = total_priceP + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);;
+                    } 
+                }
+
+                // Obtain proportion
+                overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) 
+                            * parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
+                        + (total_priceG / (total_priceS + total_priceP + total_priceG)) 
+                            * parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
+                        + (total_priceP / (total_priceS + total_priceP + total_priceG)) 
+                            * parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
+                overall_change = ((overall_change >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
+                
+                // Update fields
+                $(".total-change").html(overall_change);
+                $(".total-dollars").html("$" + (roundResults(total_priceS + total_priceG + total_priceP, 2)).toString());
+            });
+
+        }
+
+
+    </script>
+</body>
+
+</html>

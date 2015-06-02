@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!--*************************** 
+ * UCSD CSE 134B SP15
+ * Authors: Andrew Wang
+ *          Jonathan Ho
+ *          Long Tran
+ * DATE: May 31st, 2015
+ ***************************-->
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Team 3 and Dream Team">
+    <link rel="stylesheet" type="text/css" href="./style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script src="./js/velocity.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
+    <script src="./js/team3.js"></script>
+    <title>Login - CoinFlip</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        /**************************************
+         * invokeAuthorization() :
+         *
+         * Method that invokes FB's auth module.
+         */
+        function invokeAuthorization(){
+            var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+            ref.authWithOAuthPopup("facebook", function(error, authData) {
+                if (error) {
+                } else {
+                    // Grant user access to app
+                    $("#loginLink").attr("href", "views/wire2.html");
+                    $("#loginLink").removeAttr("onClick");
+                    $("#log-in-button").html("Welcome");
+                }
+            });
+
+        }
+    </script>
+    <nav>
+        COINFLIP
+    </nav>
+    <div class="mobile-nav">
+        COINFLIP
+    </div>
+    <div id="w1-wrapper">
+
+        <section id="w1-left">
+            <h1>COINFLIP</h1>
+            <h3>Manage your coin collection with a simple app.</h3>
+            <a id="loginLink" onClick="invokeAuthorization()" ><span id="log-in-button">Enter</span></a>
+        </section>
+
+        <section id="w1-right">
+            <div id="iphone">
+                <div id="iphone-camera"></div>
+                <div id="iphone-speaker"></div>
+                <div id="iphone-screen"></div>
+                <div id="iphone-home"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <script type="text/javascript">
+        loadFooter();    
+    </script>
+</body>
+
+</html>

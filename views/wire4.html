@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--*************************** 
+ * UCSD CSE 134B SP15
+ * Authors: Andrew Wang
+ *          Jonathan Ho
+ *          Long Tran
+ * DATE: May 31st, 2015
+ ***************************-->
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
+    <meta name="author" content="CSE134B Dream Team">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+    <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <script src="../js/jquery-1.11.2.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
+    <script src="../js/velocity.min.js"></script>
+    <script src="../js/main.js"></script>
+    <title>Gold Item - CoinFlip</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+        var authData = ref.getAuth();
+        if(authData){
+
+        } else {    
+            document.location = "../index.html";
+        }
+        loadTopNav();
+    </script>
+    <script type="text/javascript">
+    
+    </script>
+    <section class="main-section">
+        <section class="coin_wrapper">
+            <div class="mobile-nav">
+                <a href="wire3_g.html">
+                    <svg class="icon icon-keyboard-arrow-left">
+                        <symbol id="icon-keyboard-arrow-left" viewBox="0 0 1024 1024">
+                            <title>keyboard-arrow-left</title>
+                            <path class="path1" d="M657.707 696.96l-195.627-195.627 195.627-195.627-60.373-60.373-256 256 256 256z"></path>
+                        </symbol>
+                        <use xlink:href="#icon-keyboard-arrow-left"></use>
+                    </svg>
+                </a>
+                ITEM DETAIL
+            </div>
+            <div class="coin_main">
+                <a href="wire3_g.html">
+                    <div class="breadcrumb">
+                        <svg class="icon icon-play-arrow-rev">
+                            <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
+                                <title>play-arrow</title>
+                                <path class="path1" d="M682.667 213.333v597.333l-469.333-298.667z"></path>
+                            </symbol>
+                            <use xlink:href="#icon-play-arrow"></use>
+                        </svg>
+                        Item Detail
+                    </div>
+                </a>
+                <section class="coin_image">
+                    <div class="img_box">
+                        <div class="img_circle"></div>
+                    </div>
+                </section>
+                <section class="coin_detail">
+                    <table>
+                        <tr>
+                            <td>Metal</td>
+                            <td id="metalTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td id="typeTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Purchase Date</td>
+                            <td id="dateTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Qty.</td>
+                            <td id="qtyTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Premium</td>
+                            <td id="premiumTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Unit Price</td>
+                            <td id="priceTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Purity %</td>
+                            <td id="pureTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Weight/unit (g)</td>
+                            <td id="wuTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Metal g/u</td>
+                            <td id="guTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Metal ozt/u</td>
+                            <td id="ozTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Total wt (ozt)</td>
+                            <td id="twtTag"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong id="totalTag"></strong></td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </section>
+    </section>
+    <script type="text/javascript">
+    loadFooter();
+    var query = location.href.substring((location.href.indexOf('?') + 1), location.href.length);
+    var querysplit = query.split('&');
+    if(querysplit[1] == 'gold'){
+        loadSideNav(1);
+    } else if(querysplit[1] == 'silver'){
+        loadSideNav(2);
+    } else {
+        loadSideNav(3);
+    }
+    window.onload = function(){
+        new Firebase("https://cse134bteam3.firebaseio.com")
+        .child("users")
+        .child((new Firebase("https://cse134bteam3.firebaseio.com"))
+        .getAuth().uid)
+        .child(querysplit[1]).child(querysplit[0])
+        .on("value", function(data){ 
+            $("#metalTag").html(querysplit[1]);
+            if(data.val() !== null){
+              $("#typeTag").html(data.val()['type']);
+              $("#qtyTag").html(data.val()['qty']);
+              $("#dateTag").html(data.val()['pdate']);
+              $("#premiumTag").html(data.val()['pre']);
+              $("#priceTag").html(data.val()['price']);
+              $("#pureTag").html(data.val()['pure']);
+              $("#wuTag").html(data.val()['wu']);
+              $("#guTag").html(data.val()['gu']);
+              $("#ozTag").html(data.val()['oz']);
+              $("#twtTag").html(data.val()['tlw']);
+              //$("#totalTag").html(parseFloat(data.val()['price']) + parseFloat(data.val()['qty']) * parseFloat(data.val()['pre'])).toString();
+              $("#totalTag").html(parseFloat(data.val()['price']) + parseFloat(data.val()['qty']) * parseFloat(data.val()['pre']).toString());
+            }  
+        $(".coin_detail").append('<a href="update.html?' + querysplit[1] + '&' + querysplit[0] + '"><span id="update">Update Values</span></a>');
+        $(".coin_detail").append('<a onClick="removeCoin()" href="wire3_' + querysplit[1].substring(0,1) + '.html"><span id="remove">Remove Set</span></a>');
+
+    });
+    }
+
+    function removeCoin(){
+        var query = location.href.substring((location.href.indexOf('?') + 1), location.href.length);
+        var querysplit = query.split('&');
+        new Firebase("https://cse134bteam3.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3.firebaseio.com")).getAuth().uid).child(querysplit[1]).child(querysplit[0]).remove();
+    }
+
+    function receiveAggregateData(data){};
+    function getAggregateData(a, b, c){};
+    </script>
+</body>
+
+</html>
