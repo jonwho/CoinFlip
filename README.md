@@ -1,5 +1,5 @@
-# HOMEWORK 4
-# Team 3 - Andrew Wang, Long Tran, Jonathan Ho
+# HOMEWORK 5
+# Team 3 - Andrew Wang, Long Tran, Jonathan Ho, Kevin Tran
 
 ## Before submission
 * Check HTML & CSS validation
