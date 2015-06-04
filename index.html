@@ -52,7 +52,7 @@
          * Method that invokes Google's auth module.
          */
         function invokeGAuthorization(){
-            var ref = new Firebase();
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
             ref.authWithOAuthPopup("google", function(error, authData) {
                 if (error) {
                 } else {
