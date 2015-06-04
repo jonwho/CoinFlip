@@ -29,19 +29,34 @@
 <body>
     <script type="text/javascript">
         /**************************************
-         * invokeAuthorization() :
+         * invokeFBAuthorization() :
          *
          * Method that invokes FB's auth module.
          */
-        function invokeAuthorization(){
-            var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+        function invokeFBAuthorization(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
             ref.authWithOAuthPopup("facebook", function(error, authData) {
                 if (error) {
                 } else {
                     // Grant user access to app
-                    $("#loginLink").attr("href", "views/wire2.html");
-                    $("#loginLink").removeAttr("onClick");
-                    $("#log-in-button").html("Welcome");
+                    document.location = "./views/wire2.html";
+
+                }
+            });
+
+        }
+
+        /**************************************
+         * invokeAuthorization() :
+         *
+         * Method that invokes Google's auth module.
+         */
+        function invokeGAuthorization(){
+            var ref = new Firebase();
+            ref.authWithOAuthPopup("google", function(error, authData) {
+                if (error) {
+                } else {
+                    document.location = "./views/wire2.html";
                 }
             });
 
@@ -58,7 +73,11 @@
         <section id="w1-left">
             <h1>COINFLIP</h1>
             <h3>Manage your coin collection with a simple app.</h3>
-            <a id="loginLink" onClick="invokeAuthorization()" ><span id="log-in-button">Enter</span></a>
+            <div id="authWrapper">
+                <a id="fbLogin" onClick="invokeFBAuthorization()" ><span id="log-in-buttonFB">Facebook</span></a>
+                <a id="gLogin" onClick="invokeGAuthorization()" ><span id="log-in-buttonG">Google</span></a>
+            </div>
+
         </section>
 
         <section id="w1-right">

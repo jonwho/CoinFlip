@@ -31,7 +31,7 @@
     <script type="text/javascript">
         /* Checks for authetication. If no authentication, sends to index.html
            for authentication process */
-        var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+        var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
         var authData = ref.getAuth();
         if(authData){
 
@@ -219,7 +219,7 @@
         retrieveCurrentMetalsPrices(['SI.CMX', 'GC.CMX', 'PLM15.NYM']);
         
         // Query coin data from Firebase back-end using auth UID.
-        new Firebase("https://cse134bteam3.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3.firebaseio.com")).getAuth().uid).on("value", function(data){ 
+        new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
             var total_price = 0.0;
             for(itemIter in data.val()['platinum']){
                 total_price = total_price + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);
@@ -253,7 +253,7 @@
             $("#daily-change").html(sync['PLM15.NYM']['changePercent']);
             // Query firebase for data on coins to provide overview data
             (sync['PLM15.NYM']['change'].substring(0,1) == '+') ? document.getElementById("pchange").setAttribute("class", "pos-change") : document.getElementById("pchange").setAttribute("class", "neg-change")
-            new Firebase("https://cse134bteam3.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3.firebaseio.com")).getAuth().uid).on("value", function(data){ 
+            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
                 var overall_change = 0.0;
                 var total_priceS = 0.0;
                 var total_priceP = 0.0;
