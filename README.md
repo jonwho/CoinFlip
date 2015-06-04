@@ -1,10 +1,10 @@
 --- TODO FOR THIS ASSIGNMENT -- 
 [in progress] fix all major bugs
-[]	login services (Facebook?)
-[]	current price of metals from Quandl
-[]	Grunt.js
-[]	Mixpanel for analytics
-[]	Rollbar for error tracking
+[]		login services (Facebook?)
+[]		current price of metals from Quandl
+[LT]	Grunt.js
+[]		Mixpanel for analytics
+[LT]	Rollbar for error tracking
 []	README
 
 # HOMEWORK 5
