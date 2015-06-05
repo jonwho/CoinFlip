@@ -127,11 +127,20 @@ function loadForm(data, metal) {
 	strVar += "<tr>";
 	strVar += "    <td>Type<\/td>";
 	strVar += "    <td>";
+	strVar += "			<select id =\"fbt\">";
+	if (type == "coin") {
+		strVar += "            <option value=\"coin\">Coin<\/option>";
+		strVar += "            <option value=\"bullion\">Bullion<\/option>";
+	} else if (metal == "bullion") {
+		strVar += "            <option value=\"coin\">Coin<\/option>";
+		strVar += "            <option value=\"bullion\">Bullion<\/option>";
+	}
 	if (data) {
 		strVar += "        <input id=\"fbt\" name=\"Type\" value=\"" + data['type'] + "\" \/>";
 	} else {
 		strVar += "        <input id=\"fbt\" name=\"Type\" required placeholder=\"e.g. U.S. Eagle\" \/>";
 	}
+	strVar += "        <\/select>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
