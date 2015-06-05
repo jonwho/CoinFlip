@@ -223,22 +223,23 @@
 
         // Query coin data from Firebase back-end using auth UID.
         new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
-            debugger;
             var total_price = 0.0;
             if(data.val()){
-                for(itemIter in data.val()['gold']){
-                    total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price']), 2);
-                    $(".gTable").append(
-                            "<tr onclick='document.location = \"wire4.html?" + itemIter + "&gold\";'>\
-                                <td class='stack_img_col'><div class='coin_mini'></div></td>\
-                                <td>" + data.val()['gold'][itemIter]['type'] + "</td>\
-                                <td>"+data.val()['gold'][itemIter]['qty']+"</td>\
-                                <td>"+data.val()['gold'][itemIter]['price']+"</td>\
-                                <td>"+data.val()['gold'][itemIter]['pre']+"</td>\
-                                <td>"+data.val()['gold'][itemIter]['pdate']+"</td>\
-                            </tr>\
-                    "); 
-                }   
+                if('gold' in data.val()){
+                    for(itemIter in data.val()['gold']){
+                        total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price']), 2);
+                        $(".gTable").append(
+                                "<tr onclick='document.location = \"wire4.html?" + itemIter + "&gold\";'>\
+                                    <td class='stack_img_col'><div class='coin_mini'></div></td>\
+                                    <td>" + data.val()['gold'][itemIter]['type'] + "</td>\
+                                    <td>"+data.val()['gold'][itemIter]['qty']+"</td>\
+                                    <td>"+data.val()['gold'][itemIter]['price']+"</td>\
+                                    <td>"+data.val()['gold'][itemIter]['pre']+"</td>\
+                                    <td>"+data.val()['gold'][itemIter]['pdate']+"</td>\
+                                </tr>\
+                        "); 
+                    }   
+                }
             }
             $(".total-dollars").html("$" + roundResults(total_price, 2));
          });

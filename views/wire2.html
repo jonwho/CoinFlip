@@ -293,34 +293,41 @@
                 // Calculate portfolio change based on proportion of portfolio allocated to metals
                 var overall_change;
                 var total_priceS = 0.0;
-                if('silver' in data.val()){
-                    for(itemIter in data.val()['silver']){
-                        total_priceS = total_priceS + parseFloat(data.val()['silver'][itemIter]['price']) 
-                                * parseFloat(data.val()['silver'][itemIter]['qty']);;
-                    }   
-                }
                 var total_priceG = 0.0;
-                if('gold' in data.val()){
-                    for(itemIter in data.val()['gold']){
-                        total_priceG = total_priceG + parseFloat(data.val()['gold'][itemIter]['price'])*parseFloat(data.val()['gold'][itemIter]['qty']);;
-                    }   
-                }
                 var total_priceP = 0.0;
-                if('platinum' in data.val()){
-                    for(itemIter in data.val()['platinum']){
-                        total_priceP = total_priceP + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);;
-                    } 
+
+                if(data.val()){
+                    if('silver' in data.val()){
+                        for(itemIter in data.val()['silver']){
+                            total_priceS = total_priceS + parseFloat(data.val()['silver'][itemIter]['price']) 
+                                    * parseFloat(data.val()['silver'][itemIter]['qty']);;
+                        }   
+                    }
+                    if('gold' in data.val()){
+                        for(itemIter in data.val()['gold']){
+                            total_priceG = total_priceG + parseFloat(data.val()['gold'][itemIter]['price'])*parseFloat(data.val()['gold'][itemIter]['qty']);;
+                        }   
+                    }
+                    if('platinum' in data.val()){
+                        for(itemIter in data.val()['platinum']){
+                            total_priceP = total_priceP + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);;
+                        } 
+                    }
                 }
 
                 // Obtain proportion
-                overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) 
-                            * parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
-                        + (total_priceG / (total_priceS + total_priceP + total_priceG)) 
-                            * parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
-                        + (total_priceP / (total_priceS + total_priceP + total_priceG)) 
-                            * parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
-                overall_change = ((overall_change >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
-                
+                if(total_priceS + total_priceP + total_priceG > 0){
+                    overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) 
+                                * parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
+                            + (total_priceG / (total_priceS + total_priceP + total_priceG)) 
+                                * parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
+                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) 
+                                * parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
+                    overall_change = ((overall_change >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
+                } else {
+                    overall_change = '+' + (0.0).toString() + '%';
+                }
+                    
                 // Update fields
                 $(".total-change").html(overall_change);
                 $(".total-dollars").html("$" + (roundResults(total_priceS + total_priceG + total_priceP, 2)).toString());

@@ -221,19 +221,23 @@
         // Query coin data from Firebase back-end using auth UID.
         new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
             var total_price = 0.0;
-            for(itemIter in data.val()['platinum']){
-                total_price = total_price + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);
-                $(".pTable").append(
-                        "<tr onclick='document.location = \"wire4.html?" + itemIter + "&platinum\";'>\
-                            <td class='stack_img_col'><div class='coin_mini'></div></td>\
-                            <td>" + data.val()['platinum'][itemIter]['type'] + "</td>\
-                            <td>"+data.val()['platinum'][itemIter]['qty']+"</td>\
-                            <td>"+data.val()['platinum'][itemIter]['price']+"</td>\
-                            <td>"+data.val()['platinum'][itemIter]['pre']+"</td>\
-                            <td>"+data.val()['platinum'][itemIter]['pdate']+"</td>\
-                        </tr>\
-                "); 
-            }   
+            if(data.val()){
+                if('platinum' in data.val()){
+                    for(itemIter in data.val()['platinum']){
+                        total_price = total_price + parseFloat(data.val()['platinum'][itemIter]['price'])*parseFloat(data.val()['platinum'][itemIter]['qty']);
+                        $(".pTable").append(
+                                "<tr onclick='document.location = \"wire4.html?" + itemIter + "&platinum\";'>\
+                                    <td class='stack_img_col'><div class='coin_mini'></div></td>\
+                                    <td>" + data.val()['platinum'][itemIter]['type'] + "</td>\
+                                    <td>"+data.val()['platinum'][itemIter]['qty']+"</td>\
+                                    <td>"+data.val()['platinum'][itemIter]['price']+"</td>\
+                                    <td>"+data.val()['platinum'][itemIter]['pre']+"</td>\
+                                    <td>"+data.val()['platinum'][itemIter]['pdate']+"</td>\
+                                </tr>\
+                        "); 
+                    }   
+                }
+            }
             $(".total-dollars").html("$" + roundResults(total_price, 2));
          });
 
