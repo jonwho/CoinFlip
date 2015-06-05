@@ -227,7 +227,7 @@
             if(data.val()){
                 if('gold' in data.val()){
                     for(itemIter in data.val()['gold']){
-                        total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price']), 2);
+                        total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price'] * parseFloat(data.val()['gold'][itemIter]['qty'])), 2);
                         $(".gTable").append(
                                 "<tr onclick='document.location = \"wire4.html?" + itemIter + "&gold\";'>\
                                     <td class='stack_img_col'><div class='coin_mini'></div></td>\

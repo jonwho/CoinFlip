@@ -224,7 +224,7 @@
             var total_price = 0.0;
             if(data.val() !== null){ // Check if there are coins. No sense aggregating no coins
                 for(itemIter in data.val()['silver']){
-                    total_price = total_price + parseFloat(data.val()['silver'][itemIter]['price']);
+                    total_price = total_price + parseFloat(data.val()['silver'][itemIter]['price']) * parseFloat(data.val()['silver'][itemIter]['qty']);
                     
                     // Append row to table for coin entry
                     $(".sTable").append(
