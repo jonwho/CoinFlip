@@ -131,7 +131,7 @@ function loadForm(data, metal) {
 	if (type == "coin") {
 		strVar += "            <option value=\"coin\">Coin<\/option>";
 		strVar += "            <option value=\"bullion\">Bullion<\/option>";
-	} else if (metal == "bullion") {
+	} else if (type == "bullion") {
 		strVar += "            <option value=\"coin\">Coin<\/option>";
 		strVar += "            <option value=\"bullion\">Bullion<\/option>";
 	}
