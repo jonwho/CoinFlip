@@ -66,10 +66,10 @@ function saveDataToFirebase(username, id) {
     };
 
     if (id == "") {   // Used to create data
-        myFirebaseRef.child("users").child(username).child(metal).push(data);
+        myFirebaseRef.child("users").child(username).child(metal).child(type).push(data);
     } else {          // Used to update data
         myFirebaseRef.child("users").child(username)
-            .child(metal).child(id).set(data);
+            .child(metal).child(type).child(id).set(data);
     }
 
     // Return to page of respective metal
