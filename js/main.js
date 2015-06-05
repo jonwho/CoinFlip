@@ -127,20 +127,20 @@ function loadForm(data, metal) {
 	strVar += "<tr>";
 	strVar += "    <td>Type<\/td>";
 	strVar += "    <td>";
-	strVar += "			<select id =\"fbt\">";
-	if (type == "coin") {
-		strVar += "            <option value=\"coin\">Coin<\/option>";
-		strVar += "            <option value=\"bullion\">Bullion<\/option>";
-	} else if (type == "bullion") {
-		strVar += "            <option value=\"coin\">Coin<\/option>";
-		strVar += "            <option value=\"bullion\">Bullion<\/option>";
-	}
+	strVar += "			<select id =\"fbn\">";
+	strVar += "            <option value=\"coin\">Coin<\/option>";
+	strVar += "            <option value=\"bullion\">Bullion<\/option>";
+	strVar += "        <\/select>";
+	strVar += "    <\/td>";
+	strVar += "<\/tr>";
+	strVar += "<tr>";
+	strVar += "    <td>Name<\/td>";
+	strVar += "    <td>";
 	if (data) {
 		strVar += "        <input id=\"fbt\" name=\"Type\" value=\"" + data['type'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbt\" name=\"Type\" required placeholder=\"e.g. U.S. Eagle\" \/>";
+		strVar += "        <input id=\"fbt\" name=\"Type\" required placeholder=\"e.g. US Eagle\" \/>";
 	}
-	strVar += "        <\/select>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
@@ -151,7 +151,6 @@ function loadForm(data, metal) {
 	} else {
 		strVar += "        <input id=\"fbpd\" name=\"quantity\" placeholder=\"yyyy-mm-dd\" \/>";
 	}
-	//strVar += "		<input id=\"fbpd\" type=\"date\" \/>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
