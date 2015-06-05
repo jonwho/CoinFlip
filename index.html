@@ -40,23 +40,100 @@ var _rollbarConfig = {
 <body>
     <script type="text/javascript">
         /**************************************
-         * invokeAuthorization() :
+         * invokeFBAuthorization() :
          *
          * Method that invokes FB's auth module.
          */
-        function invokeAuthorization(){
-            var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+        function invokeFBAuthorization(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
             ref.authWithOAuthPopup("facebook", function(error, authData) {
                 if (error) {
                 } else {
                     // Grant user access to app
-                    $("#loginLink").attr("href", "views/wire2.html");
-                    $("#loginLink").removeAttr("onClick");
-                    $("#log-in-button").html("Welcome");
+                    document.location = "./views/wire2.html";
+
                 }
             });
 
         }
+
+        /**************************************
+         * invokeAuthorization() :
+         *
+         * Method that invokes Google's auth module.
+         */
+        function invokeGAuthorization(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+            ref.authWithOAuthPopup("google", function(error, authData) {
+                if (error) {
+                } else {
+                    document.location = "./views/wire2.html";
+                }
+            });
+
+        }
+
+        function validateEmail(email) {
+            var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+
+        /**************************************
+         * createLogin() :
+         *
+         * Method that creates a user account from email/password
+         */
+        function createLogin(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+
+            ref.createUser({
+              email    : $("#emailR").val(),
+              password : $("#passwordR").val()
+            }, function(error, userData) {
+              if (error) {
+                console.log($("#usernameR").val());
+                console.log("Error creating user:", error);
+              } else {
+                console.log("Successfully created user account with uid:", userData.uid);
+              }
+            });
+
+        }
+
+        function loginUser(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+            ref.authWithPassword({
+              email    : $("#usernameL").val(),
+              password : $("#passwordL").val()
+            }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+              } else {
+                console.log("Authenticated successfully with payload:", authData);
+                document.location = "./views/wire2.html";
+              }
+            });
+        }
+
+        $(function() {
+
+            $('#login-form-link').click(function(e) {
+                $("#login-form").delay(100).fadeIn(100);
+                $("#register-form").fadeOut(100);
+                $('#register-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+            $('#register-form-link').click(function(e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+
+        });
+
     </script>
     <nav>
         COINFLIP
@@ -69,7 +146,96 @@ var _rollbarConfig = {
         <section id="w1-left">
             <h1>COINFLIP</h1>
             <h3>Manage your coin collection with a simple app.</h3>
-            <a id="loginLink" onClick="invokeAuthorization()" ><span id="log-in-button">Enter</span></a>
+            <!--<div id="emailAuthWrapper">
+                <div class="form-group">
+                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="container" style="padding-top:30px">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="panel panel-login">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div style="width:45%;height:30px;float:left;margin-right:0">
+                                            <a href="#" class="active" id="login-form-link">Login</a>
+                                        </div>
+                                        <div style="width:45%;height:30px;float:right;margin-right:0">
+                                            <a href="#" id="register-form-link">Register</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form id="login-form" action="javascript:loginUser()" style="display: block;">
+                                                <div class="form-group">
+                                                    <input type="text" name="username" id="usernameL" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="password" id="passwordL" tabindex="2" class="form-control" placeholder="Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="text-center">
+                                                                <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form id="register-form" action="javascript:createLogin()" method="post" role="form" style="display: none;">
+                                                <div class="form-group">
+                                                    <input type="text" name="username" id="usernameR" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="email" name="email" id="emailR" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="password" id="passwordR" tabindex="2" class="form-control" placeholder="Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" name="confirm-password" id="confirm-passwordR" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div id="altAuthWrapper">
+                <a id="fbLogin" onClick="invokeFBAuthorization()" ><span id="log-in-buttonFB">Facebook</span></a>
+                <a id="gLogin" onClick="invokeGAuthorization()" ><span id="log-in-buttonG">Google</span></a>
+            </div>
+
         </section>
 
         <section id="w1-right">
