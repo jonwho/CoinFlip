@@ -72,22 +72,36 @@
          *
          * Method that creates a user account from email/password
          */
-        function createLogin(username, password){
-            var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
-            if(!validateEmail){
-                alert("Please enter a valid email!");
-            }
+        function createLogin(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+
             ref.createUser({
-              email    : "bobtony@firebase.com",
-              password : "correcthorsebatterystaple"
+              email    : $("#emailR").val(),
+              password : $("#passwordR").val()
             }, function(error, userData) {
               if (error) {
+                console.log($("#usernameR").val());
                 console.log("Error creating user:", error);
               } else {
                 console.log("Successfully created user account with uid:", userData.uid);
               }
             });
 
+        }
+
+        function loginUser(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+            ref.authWithPassword({
+              email    : $("#usernameL").val(),
+              password : $("#passwordL").val()
+            }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+              } else {
+                console.log("Authenticated successfully with payload:", authData);
+                document.location = "./views/wire2.html";
+              }
+            });
         }
 
         $(function() {
@@ -154,12 +168,12 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                            <form id="login-form" action="javascript:loginUser()" style="display: block;">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                    <input type="text" name="username" id="usernameL" tabindex="1" class="form-control" placeholder="Username" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                                    <input type="password" name="password" id="passwordL" tabindex="2" class="form-control" placeholder="Password">
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
@@ -178,18 +192,18 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                            <form id="register-form" action="javascript:createLogin()" method="post" role="form" style="display: none;">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                    <input type="text" name="username" id="usernameR" tabindex="1" class="form-control" placeholder="Username" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                                    <input type="email" name="email" id="emailR" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                                    <input type="password" name="password" id="passwordR" tabindex="2" class="form-control" placeholder="Password">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                                    <input type="password" name="confirm-password" id="confirm-passwordR" tabindex="2" class="form-control" placeholder="Confirm Password">
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
