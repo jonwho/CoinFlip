@@ -144,7 +144,7 @@ function loadForm(data, metal, type, values) {
 	strVar += "<tr>";
 	strVar += "    <td>Type<\/td>";
 	strVar += "    <td>";
-	strVar += "			<select id =\"fbt\" onchange=\"reloadCritFields(\'bullion\')\">";
+	strVar += "			<select id =\"fbt\">";
 	if(type == 'coin'){
 		strVar += "            <option value=\"coin\" selected=\"selected\">Coin<\/option>";
 		strVar += "            <option value=\"bullion\">Bullion<\/option>";
@@ -293,6 +293,7 @@ function loadForm(data, metal, type, values) {
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
+
 	return strVar;
 }
 

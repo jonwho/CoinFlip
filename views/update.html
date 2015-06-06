@@ -99,22 +99,36 @@ var _rollbarConfig = {
         loadFooter();
         var coinValues;
 
-        function reloadPage(metal, type){
-            var childName = metal.value + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
+        function reloadPage(){
+            
+            var childName = $("#fbm").val() + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
             new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
                 $("#fbn").empty();
                 for(value in data.val()){
                     $("#fbn").append("<option value=\"" + data.val()[value].name + "\">" + data.val()[value].name + "<\/option>");                    
                 }
+                if($("#fbt").val() == 'bullion'){
+                    $("#diaRow").remove();
+                    //$(".img_circle").attr('class', 'img_rect');
+                } else {
+                    $("#updateForm").append("<tr id='diaRow'><td>Diameter (mm)<\/td><td><input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/><\/td><\/tr>");
+                    //$(".img_rect").attr('class', 'img_circle');
+                
+                }
+                fillData($("#fbn"));
+                
             });
         }
 
         function fillData(value){
             var childName = $("#fbm").val() + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
+            if(typeof value.value === 'undefined'){
+                value.value = value.val();
+            }
             new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
                 data = data.val();
                 $("#fbn option:contains(\"" + data[value.value]['name'] + "\")").attr('selected', 'selected');
-                $("#fbpure").attr('value', data['pure']);
+                $("#fbpure").attr('value', data[value.value]['pure']);
                 $("#fbwu").attr('value', data[value.value]['wu']);
                 $("#fbgu").attr('value', data[value.value]['gu']);
                 $("#fboz").attr('value', data[value.value]['oz']);
@@ -123,6 +137,7 @@ var _rollbarConfig = {
                 if($("#fbt").val() == 'coin'){
                     $("#fbdia").attr('value', data[value.value]['diameter']);
                 }
+                $("#frontImg").attr("src", data[value.value]['front']);
             });
         }
         
@@ -170,18 +185,19 @@ var _rollbarConfig = {
                     $("#updateForm").html(loadForm(0, query, 'coin', data.val()));
 
                     for(first in data.val()){
-                        $("#fbm").attr("onchange", "reloadPage(this, \"" + query + "\")");
+                        $("#fbm").attr("onchange", "reloadPage()");
+                        $("#fbt").attr("onchange", "reloadPage()")
                         $("#fbn").attr("onchange", "fillData(this)");
                         $(".img_circle").remove();
                         $(".img_box").append("<img id='frontImg' src='" + data.val()[first]['front'] + "' alt='Coin'>");
                         break;
                     }
+                    fillData($("#fbn"));
                 });
                 
             }
         }
         // Load default date
-        fillData($("#fbn"));
         $("fbpd").attr("value", getDate());
 
 
