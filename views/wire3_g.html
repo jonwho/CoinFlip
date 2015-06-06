@@ -220,7 +220,9 @@
 
         // Kick off live stream
         retrieveCurrentMetalsPrices(['SI.CMX', 'GC.CMX', 'PLM15.NYM']);
-
+        new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("goldCoins").on("value", function(data){
+            console.log(data);
+        });
         // Query coin data from Firebase back-end using auth UID.
         new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
             var total_price = 0.0;

@@ -285,6 +285,10 @@
             document.getElementById("pchange").innerHTML = sync['PLM15.NYM']['change'];
             (sync['PLM15.NYM']['change'].substring(0,1) == '+') ? document.getElementById("pchange").setAttribute("class", "pos-change") : document.getElementById("pchange").setAttribute("class", "neg-change")
 
+            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("goldCoins").on("value", function(data){
+                console.log(data.val());
+            });
+
             // Query firebase for data on coins to provide overview data
             new Firebase("https://cse134bteam3-hw5.firebaseio.com")
                         .child("users")

@@ -80,6 +80,19 @@ function saveDataToFirebase(username, id) {
     document.location = 'wire3_' + metal.substring(0, 1) + '.html';
 }
 
+function reloadCritFields(type){
+    if(type == 'bullion'){
+        $("#fbt").attr("onchange", 'reloadCritFields("coin")');
+        $("#diaRow").remove();
+        $(".img_circle").attr('class', 'img_rect');
+    } else {
+        $("#fbt").attr("onchange", 'reloadCritFields("bullion")');
+        $("#updateForm").append("<tr id='diaRow'><td>Diameter (mm)<\/td><td><input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/><\/td><\/tr>");
+        $(".img_rect").attr('class', 'img_circle');
+
+    }
+}
+
 /**************************************
  * filterData(data) :
  *
