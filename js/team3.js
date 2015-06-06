@@ -7,7 +7,7 @@
  ***************************/
 
 
-var myFirebaseRef = new Firebase("https://cse134bteam3.firebaseio.com/");
+var myFirebaseRef = new Firebase("https://cse134bteam3-hw5.firebaseio.com/");
 
 // define Firebase refs to use depending on page
 var fAuthRef = myFirebaseRef.child("auth");
@@ -32,7 +32,8 @@ function saveDataToFirebase(username, id) {
     // Retrieve input data for coin
     var metal = $("#fbm :selected").val();
     var newqty = 0;
-    var type = $("#fbt").val().toString();
+    var name = $("#fbn").val().toString();
+    var type = $("#fbt :selected").val();
     var pdate = $("#fbpd").val();
     var qty = parseInt($("#fbq").val());
     var pre = parseFloat($("#fbp").val());
@@ -54,6 +55,7 @@ function saveDataToFirebase(username, id) {
     // Aggregate data
     var data = {
         type: type,
+        name: name,
         pdate: pdate,
         qty: parseInt(qty),
         pre: pre,
@@ -65,11 +67,13 @@ function saveDataToFirebase(username, id) {
         tlw: parseFloat(tlw)
     };
 
+    console.log(data);
+
     if (id == "") {   // Used to create data
-        myFirebaseRef.child("users").child(username).child(metal).child(type).push(data);
+        myFirebaseRef.child("users").child(username).child(metal).push(data);
     } else {          // Used to update data
         myFirebaseRef.child("users").child(username)
-            .child(metal).child(type).child(id).set(data);
+            .child(metal).child(id).set(data);
     }
 
     // Return to page of respective metal

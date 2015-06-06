@@ -14,12 +14,14 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="description" content="bullion management site, rare coins, gold, silver, platinum">
     <meta name="author" content="CSE134B Dream Team">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../style/style.css">
     <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <script src="../js/jquery-1.11.2.min.js"></script>
     <script src="../js/Chart.js"></script>
+    <script src="../js/bootstrap.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/team3.js"></script>
@@ -224,13 +226,13 @@
             var total_price = 0.0;
             if(data.val() !== null){ // Check if there are coins. No sense aggregating no coins
                 for(itemIter in data.val()['silver']){
-                    total_price = total_price + parseFloat(data.val()['silver'][itemIter]['price']);
+                    total_price = total_price + parseFloat(data.val()['silver'][itemIter]['price']) * parseFloat(data.val()['silver'][itemIter]['qty']);
                     
                     // Append row to table for coin entry
                     $(".sTable").append(
                             "<tr onclick='document.location = \"wire4.html?" + itemIter + "&silver\";'>\
                                 <td class='stack_img_col'><div class='coin_mini'></div></td>\
-                                <td>" + data.val()['silver'][itemIter]['type'] + "</td>\
+                                <td>" + data.val()['silver'][itemIter]['name'] + "</td>\
                                 <td>"+data.val()['silver'][itemIter]['qty']+"</td>\
                                 <td>"+data.val()['silver'][itemIter]['price']+"</td>\
                                 <td>"+data.val()['silver'][itemIter]['pre']+"</td>\
