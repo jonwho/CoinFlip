@@ -32,8 +32,8 @@ function saveDataToFirebase(username, id) {
     // Retrieve input data for coin
     var metal = $("#fbm :selected").val();
     var newqty = 0;
-    var type = $("#fbt").val().toString();
-    var name = $("#fbn :selected").val();
+    var name = $("#fbn").val().toString();
+    var type = $("#fbt :selected").val();
     var pdate = $("#fbpd").val();
     var qty = parseInt($("#fbq").val());
     var pre = parseFloat($("#fbp").val());
