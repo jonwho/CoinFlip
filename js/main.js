@@ -133,19 +133,11 @@ function loadForm(data, metal, type, values) {
 	strVar += "    <td>Metal<\/td>";
 	strVar += "    <td>";
 	strVar += "        <select id=\"fbm\">";
-	if (metal == "gold") {
-		strVar += "            <option value=\"gold\">Gold<\/option>";
-		strVar += "            <option value=\"silver\">Silver<\/option>";
-		strVar += "            <option value=\"platinum\">Platinum<\/option>";
-	} else if (metal == "silver") {
-		strVar += "            <option value=\"silver\">Silver<\/option>";
-		strVar += "            <option value=\"gold\">Gold<\/option>";
-		strVar += "            <option value=\"platinum\">Platinum<\/option>";
-	} else {
-		strVar += "            <option value=\"platinum\">Platinum<\/option>";
-		strVar += "            <option value=\"silver\">Silver<\/option>";
-		strVar += "            <option value=\"gold\">Gold<\/option>";
-	}
+
+	strVar += "            <option value=\"gold\"" + ((metal == 'gold')? "selected=\"selected\"" : "") + ">Gold<\/option>";
+	strVar += "            <option value=\"silver\"" + ((metal == 'silver')? "selected=\"selected\"" : "") + ">Silver<\/option>";
+	strVar += "            <option value=\"platinum\"" + ((metal == 'platinum')? "selected=\"selected\"" : "") + ">Platinum<\/option>";
+
 	strVar += "        <\/select>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";

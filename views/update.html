@@ -99,14 +99,31 @@ var _rollbarConfig = {
         loadFooter();
         var coinValues;
 
-        function fillData(metal, type, values){
-            $("#fbn option:contains('" + values['name'] + "')").attr('selected', 'selected');
-            $("#fbpure").attr('value', values['pure']);
-            $("#fbwu").attr('value', values['wu']);
-            $("#fbgu").attr('value', values['gu']);
-            $("#fboz").attr('value', values['oz']);
-            $("#fbtl").attr('value', values['tlw']);
-            $("#fbthk").attr('value', values['thickness']);
+        function reloadPage(metal, type){
+            var childName = metal.value + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
+            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
+                $("#fbn").empty();
+                for(value in data.val()){
+                    $("#fbn").append("<option value=\"" + data.val()[value].name + "\">" + data.val()[value].name + "<\/option>");                    
+                }
+            });
+        }
+
+        function fillData(value){
+            var childName = $("#fbm").val() + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
+            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
+                data = data.val();
+                $("#fbn option:contains(\"" + data[value.value]['name'] + "\")").attr('selected', 'selected');
+                $("#fbpure").attr('value', data['pure']);
+                $("#fbwu").attr('value', data[value.value]['wu']);
+                $("#fbgu").attr('value', data[value.value]['gu']);
+                $("#fboz").attr('value', data[value.value]['oz']);
+                $("#fbtl").attr('value', data[value.value]['tlw']);
+                $("#fbthk").attr('value', data[value.value]['thickness']);
+                if($("#fbt").val() == 'coin'){
+                    $("#fbdia").attr('value', data[value.value]['diameter']);
+                }
+            });
         }
         
         // Parse URL string for information on ID and metal type needed for DB
@@ -150,10 +167,11 @@ var _rollbarConfig = {
                 $("#save").attr("onClick", "saveDataToFirebase('" + ((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).toString() + "', '" + querysplit[1] + "')");
             } else { // We are updating an old coin's entry
                 new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
-                    $("#updateForm").html(loadForm(0, querysplit[0], 'coin', data.val()));
+                    $("#updateForm").html(loadForm(0, query, 'coin', data.val()));
 
                     for(first in data.val()){
-                        $("#fbm").attr("onchange", fillData($("#fbm:selected").val(), 'coin', data.val()[first]));
+                        $("#fbm").attr("onchange", "reloadPage(this, \"" + query + "\")");
+                        $("#fbn").attr("onchange", "fillData(this)");
                         $(".img_circle").remove();
                         $(".img_box").append("<img id='frontImg' src='" + data.val()[first]['front'] + "' alt='Coin'>");
                         break;
@@ -163,6 +181,7 @@ var _rollbarConfig = {
             }
         }
         // Load default date
+        fillData($("#fbn"));
         $("fbpd").attr("value", getDate());
 
 
