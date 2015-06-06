@@ -44,6 +44,7 @@ function saveDataToFirebase(username, id) {
     var oz = parseFloat($("#fboz").val());
     var tlw = parseFloat($("#fbtl").val());
     var thk = parseFloat($("#fbthk").val());
+    var frnt = $("#frontImg").attr("src");
     var dia;
     if(type == 'coin'){
         dia = parseFloat($("#fbdia").val());
@@ -77,7 +78,8 @@ function saveDataToFirebase(username, id) {
             gu: parseFloat(gu),
             oz: parseFloat(oz),
             tlw: parseFloat(tlw),
-            thk: parseFloat(thk)
+            thk: parseFloat(thk),
+            frnt: frnt
         };
     } else {
         // Aggregate data
@@ -94,7 +96,8 @@ function saveDataToFirebase(username, id) {
             oz: parseFloat(oz),
             tlw: parseFloat(tlw),
             thk: parseFloat(thk),
-            dia: parseFloat(dia)
+            dia: parseFloat(dia),
+            frnt: frnt
         };
     }
 
