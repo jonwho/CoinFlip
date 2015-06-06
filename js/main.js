@@ -132,43 +132,50 @@ function loadForm(data, metal, type, values) {
 	strVar += "<tr>";
 	strVar += "    <td>Metal<\/td>";
 	strVar += "    <td>";
-	strVar += "        <select id=\"fbm\">";
+	if(data){
+		strVar += "		<input id=\"fbm\" readonly=\"readonly\" name=\"quantity\" value=\"" + metal + "\">";
+	} else {
+		strVar += "        <select id=\"fbm\">";
 
-	strVar += "            <option value=\"gold\"" + ((metal == 'gold')? "selected=\"selected\"" : "") + ">Gold<\/option>";
-	strVar += "            <option value=\"silver\"" + ((metal == 'silver')? "selected=\"selected\"" : "") + ">Silver<\/option>";
-	strVar += "            <option value=\"platinum\"" + ((metal == 'platinum')? "selected=\"selected\"" : "") + ">Platinum<\/option>";
+		strVar += "            <option value=\"gold\"" + ((metal == 'gold')? "selected=\"selected\"" : "") + ">Gold<\/option>";
+		strVar += "            <option value=\"silver\"" + ((metal == 'silver')? "selected=\"selected\"" : "") + ">Silver<\/option>";
+		strVar += "            <option value=\"platinum\"" + ((metal == 'platinum')? "selected=\"selected\"" : "") + ">Platinum<\/option>";
 
-	strVar += "        <\/select>";
+		strVar += "        <\/select>";
+	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
 	strVar += "    <td>Type<\/td>";
 	strVar += "    <td>";
-	strVar += "			<select id =\"fbt\">";
-	if(type == 'coin'){
-		strVar += "            <option value=\"coin\" selected=\"selected\">Coin<\/option>";
-		strVar += "            <option value=\"bullion\">Bullion<\/option>";
+	if(data){
+		strVar += "		<input id=\"fbt\" readonly=\"readonly\" name=\"quantity\" value=\"" + type + "\">";
+	} else {
+		strVar += "			<select id =\"fbt\">";
+		if(type == 'coin'){
+			strVar += "            <option value=\"coin\" selected=\"selected\">Coin<\/option>";
+			strVar += "            <option value=\"bullion\">Bullion<\/option>";
+		}
+		if(type == 'bullion'){
+			strVar += "            <option value=\"coin\" >Coin<\/option>";
+			strVar += "            <option value=\"bullion\" selected=\"selected\">Bullion<\/option>";
+		}
+		strVar += "        <\/select>";
 	}
-	if(type == 'bullion'){
-		strVar += "            <option value=\"coin\" >Coin<\/option>";
-		strVar += "            <option value=\"bullion\" selected=\"selected\">Bullion<\/option>";
-	}
-	strVar += "        <\/select>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
 	strVar += "    <td>Name<\/td>";
 	strVar += "    <td>";
-	strVar += "			<select id=\"fbn\" >";
-	for(value in values){
-		if(data){
+	if(data){
+		strVar += "		<input id=\"fbn\" readonly=\"readonly\" name=\"quantity\" value=\"" + data['name'] + "\">";
+	} else {
+		strVar += "			<select id=\"fbn\" >";
+		for(value in values){
 			strVar += "				<option value=\"" + values[value].name + "\"" + ((data['name'] == values[value].name) ? "selected=\"selected\"" : "") + ">" + values[value].name + "<\/option>"; 
-		} else {
-			strVar += "				<option value=\"" + values[value].name + "\">" + values[value].name + "<\/option>"; 
-
 		}
+		strVar += "			<\/select>";
 	}
-	strVar += "			<\/select>";
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
 	strVar += "<tr>";
@@ -276,7 +283,7 @@ function loadForm(data, metal, type, values) {
 		strVar += "    <td>Diameter (mm)<\/td>";
 		strVar += "    <td>";
 		if(data){
-			strVar += "		<input id=\"fbdia\" name=\"quantity\" value=\"" + data['diameter'] + "\" \/>";
+			strVar += "		<input id=\"fbdia\" name=\"quantity\" value=\"" + data['dia'] + "\" \/>";
 		} else {
 			strVar += "		<input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/>";
 		}
@@ -287,7 +294,7 @@ function loadForm(data, metal, type, values) {
 	strVar += "    <td>Thickness (mm)<\/td>";
 	strVar += "    <td>";
 	if(data){
-		strVar += "		<input id=\"fbthk\" name=\"quantity\" value=\"" + data['thickness'] + "\" \/>";
+		strVar += "		<input id=\"fbthk\" name=\"quantity\" value=\"" + data['thk'] + "\" \/>";
 	} else {
 		strVar += "		<input id=\"fbthk\" name=\"quantity\" placeholder=\"2.9\" \/>";
 	}
