@@ -31,6 +31,7 @@ var _rollbarConfig = {
     <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
     <script src="../js/velocity.min.js"></script>
     <script src="../js/main.js"></script>
+
     <title>Gold Item - CoinFlip</title>
 </head>
 
@@ -127,6 +128,14 @@ var _rollbarConfig = {
                             <td id="twtTag"></td>
                         </tr>
                         <tr>
+                            <td>Diameter (mm)</td>
+                            <td id="diaTag"></td>
+                        </tr>
+                        <tr>
+                            <td>Thickness (ozt)</td>
+                            <td id="thkTag"></td>
+                        </tr>
+                        <tr>
                             <td><strong>TOTAL</strong></td>
                             <td><strong id="totalTag"></strong></td>
                         </tr>
@@ -155,18 +164,24 @@ var _rollbarConfig = {
         .on("value", function(data){ 
             $("#metalTag").html(querysplit[1]);
             if(data.val() !== null){
-              $("#typeTag").html(data.val()['type']);
-              $("#qtyTag").html(data.val()['qty']);
-              $("#dateTag").html(data.val()['pdate']);
-              $("#premiumTag").html(data.val()['pre']);
-              $("#priceTag").html(data.val()['price']);
-              $("#pureTag").html(data.val()['pure']);
-              $("#wuTag").html(data.val()['wu']);
-              $("#guTag").html(data.val()['gu']);
-              $("#ozTag").html(data.val()['oz']);
-              $("#twtTag").html(data.val()['tlw']);
+                $("#typeTag").html(data.val()['type']);
+                $("#qtyTag").html(data.val()['qty']);
+                $("#dateTag").html(data.val()['pdate']);
+                $("#premiumTag").html(data.val()['pre']);
+                $("#priceTag").html(data.val()['price']);
+                $("#pureTag").html(data.val()['pure']);
+                $("#wuTag").html(data.val()['wu']);
+                $("#guTag").html(data.val()['gu']);
+                $("#ozTag").html(data.val()['oz']);
+                $("#twtTag").html(data.val()['tlw']);
+                $("#thkTag").html(data.val()['thk']);
+                if(data.val()['type'] == 'coin'){
+                    $("#diaTag").html(data.val()['dia']);
+                } else {
+                    $("#diaTag").remove();
+                }
               //$("#totalTag").html(parseFloat(data.val()['price']) + parseFloat(data.val()['qty']) * parseFloat(data.val()['pre'])).toString();
-              $("#totalTag").html(parseFloat(data.val()['price']) + parseFloat(data.val()['qty']) * parseFloat(data.val()['pre']).toString());
+              $("#totalTag").html(roundResults((parseFloat(data.val()['price']) * parseFloat(data.val()['qty']) + parseFloat(data.val()['pre'])), 2).toString());
             }  
         $(".coin_detail").append('<a href="update.html?' + querysplit[1] + '&' + querysplit[0] + '"><span id="update">Update Values</span></a>');
         $(".coin_detail").append('<a onClick="removeCoin()" href="wire3_' + querysplit[1].substring(0,1) + '.html"><span id="remove">Remove Set</span></a>');

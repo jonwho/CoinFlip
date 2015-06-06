@@ -383,6 +383,17 @@ function getWeekBack() {
 	return [today, fiveBack];
 }
 
+/**************************************
+ * roundResults(num, factor) :
+ *
+ * Function used to trim the number of digits in float
+ * - num: number to trim
+ * - factor: number of sig figs to keep
+ */
+function roundResults(num, factor) {
+    return Math.ceil(num * Math.pow(10, factor)) / (Math.pow(10, factor));
+}
+
 // Globalize drawGraph
 var drawGraph;
 

@@ -43,29 +43,60 @@ function saveDataToFirebase(username, id) {
     var gu = parseFloat($("#fbgu").val());
     var oz = parseFloat($("#fboz").val());
     var tlw = parseFloat($("#fbtl").val());
+    var thk = parseFloat($("#fbthk").val());
+    var dia;
+    if(type == 'coin'){
+        dia = parseFloat($("#fbdia").val());
+    }
 
     // Simple validation check
     if (type === "" || pdate === "" || qty === NaN || pre === NaN 
             || price === NaN || pure === NaN || wu === NaN || 
-            gu === NaN || oz === NaN || tlw === NaN) {
+            gu === NaN || thk == NaN || oz === NaN || tlw === NaN) {
         alert("Please provide valid inputs for all values before adding coin to collection!");
         return -1;
     }
-
-    // Aggregate data
-    var data = {
-        type: type,
-        name: name,
-        pdate: pdate,
-        qty: parseInt(qty),
-        pre: pre,
-        price: parseFloat(price),
-        pure: parseFloat(pure),
-        wu: parseFloat(wu),
-        gu: parseFloat(gu),
-        oz: parseFloat(oz),
-        tlw: parseFloat(tlw)
-    };
+    if(type == 'coin'){
+        if(dia === NaN){
+            alert("Please provide valid inputs for all values before adding coin to collection!");
+            return -1;
+        }
+    }
+    
+    if(type == 'bullion'){
+        // Aggregate data
+        var data = {
+            type: type,
+            name: name,
+            pdate: pdate,
+            qty: parseInt(qty),
+            pre: pre,
+            price: parseFloat(price),
+            pure: parseFloat(pure),
+            wu: parseFloat(wu),
+            gu: parseFloat(gu),
+            oz: parseFloat(oz),
+            tlw: parseFloat(tlw),
+            thk: parseFloat(thk)
+        };
+    } else {
+        // Aggregate data
+        var data = {
+            type: type,
+            name: name,
+            pdate: pdate,
+            qty: parseInt(qty),
+            pre: pre,
+            price: parseFloat(price),
+            pure: parseFloat(pure),
+            wu: parseFloat(wu),
+            gu: parseFloat(gu),
+            oz: parseFloat(oz),
+            tlw: parseFloat(tlw),
+            thk: parseFloat(thk),
+            dia: parseFloat(dia)
+        };
+    }
 
     console.log(data);
 
