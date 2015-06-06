@@ -175,9 +175,9 @@ function loadForm(data, metal, type, values) {
 	strVar += "    <td>Purchase Date<\/td>";
 	strVar += "    <td>";
 	if (data) {
-		strVar += "        <input id=\"fbpd\" name=\"quantity\" value=\"" + data['pdate'] + "\" \/>";
+		strVar += "        <input id=\"fbpd\" readonly=\"readonly\" name=\"quantity\" value=\"" + data['pdate'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbpd\" name=\"quantity\" placeholder=\"yyyy-mm-dd\" \/>";
+		strVar += "        <input id=\"fbpd\" readonly=\"readonly\" name=\"quantity\" placeholder=\"yyyy-mm-dd\" \/>";
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
