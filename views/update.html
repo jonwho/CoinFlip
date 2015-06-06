@@ -99,7 +99,7 @@ var _rollbarConfig = {
         loadFooter();
         var coinValues;
 
-        function reloadPage(){
+        function reloadPage(switchType){
             
             var childName = $("#fbm").val() + (($("#fbt").val() == 'coin') ? 'Coins' : 'Bullions');
             new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
@@ -107,13 +107,14 @@ var _rollbarConfig = {
                 for(value in data.val()){
                     $("#fbn").append("<option value=\"" + data.val()[value].name + "\">" + data.val()[value].name + "<\/option>");                    
                 }
-                if($("#fbt").val() == 'bullion'){
-                    $("#diaRow").remove();
-                    //$(".img_circle").attr('class', 'img_rect');
-                } else {
-                    $("#updateForm").append("<tr id='diaRow'><td>Diameter (mm)<\/td><td><input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/><\/td><\/tr>");
-                    //$(".img_rect").attr('class', 'img_circle');
-                
+                if(switchType == 'type'){
+                    if($("#fbt").val() == 'bullion'){
+                        $("#diaRow").remove();
+                        //$(".img_circle").attr('class', 'img_rect');
+                    } else {
+                        $("#updateForm").append("<tr id='diaRow'><td>Diameter (mm)<\/td><td><input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/><\/td><\/tr>");
+                        //$(".img_rect").attr('class', 'img_circle');
+                    }
                 }
                 fillData($("#fbn"));
                 
@@ -185,8 +186,8 @@ var _rollbarConfig = {
                     $("#updateForm").html(loadForm(0, query, 'coin', data.val()));
 
                     for(first in data.val()){
-                        $("#fbm").attr("onchange", "reloadPage()");
-                        $("#fbt").attr("onchange", "reloadPage()")
+                        $("#fbm").attr("onchange", "reloadPage('metal')");
+                        $("#fbt").attr("onchange", "reloadPage('type')")
                         $("#fbn").attr("onchange", "fillData(this)");
                         $(".img_circle").remove();
                         $(".img_box").append("<img id='frontImg' src='" + data.val()[first]['front'] + "' alt='Coin'>");
