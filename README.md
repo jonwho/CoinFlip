@@ -82,7 +82,11 @@ it easier and quicker to serve.
 
 ## CRUD Implementation
 For Create, we assigned a unique ID to each tag in the Add screen view. Users
-are expected to filled out all of the fields. Upon clicking on the "Saved" button
+are expected to select one of the pre-defined, commonly-traded coins that we
+have populated from our Firebase servers. Update selection, the fields relevant
+to the physical properties of the coin will automatically be filled out, leaving
+the user to just fill out the price and premium they bought the coin at, the  
+quantity of asset, and the date of purchase. Upon clicking on the "Saved" button
 our Javascript function uses jQuery to pull the values from these fields based
 on the unique IDs mentioend above. We perform a set of data validation checks
 to ensure that all fields are filled correctly (For example, String fields cannot
@@ -98,7 +102,11 @@ create an entry for a coin on Firebase, each entry is assigned a unique Firebase
 database. For each row in the table that displays the database's data, we assign
 each of these unique ID to the item. Although the update fields are  the same
 throughout, a call to the "Save" button will only access the specified entry in
-Firebase. 
+Firebase. Note that since HW4, we have locked the metal type, asset type, name,
+and purchase fields when updating an element. The rationale behind this is that
+if you are going to change any of these fields that are critical to defining
+a numismatic asset, then it is crucial to simply delete the entry and create
+a new one. 
 
 For Delete, it is pretty much the same exact logic as Update except much simpler.
 Once the call to the Delete button is fired, we get the unique Id of the item
