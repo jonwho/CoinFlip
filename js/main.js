@@ -1,5 +1,5 @@
 function logout() {
-	var ref = new Firebase("https://cse134bteam3.firebaseio.com");
+	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
 	this.ref.unauth();
 	document.location = "../index.html";
 }
