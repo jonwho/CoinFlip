@@ -105,6 +105,21 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
 
         }
 
+        function sendEmail(){
+            var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+            ref.resetPassword({
+                email : $("#usernameL").val()
+              }, function(error) {
+              if (error === null) {
+                alert("Password reset email sent!");
+                console.log("Password reset email sent successfully");
+              } else {
+                alert("Please speciify a valid email.");
+                console.log("Error sending password reset email:", error);
+              }
+            });                        
+        }
+
         function loginUser(){
             var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
             ref.authWithPassword({
@@ -202,8 +217,8 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <div class="text-center">
-                                                                <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                            <div class="text-center" >
+                                                                <a href="javascript:sendEmail()">Forgot Password?</a>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -52,6 +52,8 @@ function loadTopNav() {
 	// document.write("        <\/svg>");
 	document.write("		<button class=\"btn-logout\" onclick=\"logout()\">Logout<\/button>");
 	document.write("		<button class=\"btn-email\" onclick=\"loadEmailChangePage()\">Change Email<\/button>");
+	document.write("		<button class=\"btn-password\" onclick=\"loadResetPasswordPage()\">Change Email<\/button>");
+
 	document.write("    <\/nav>");
 
 	// document.write("	<div class=\"modal fade\" id=\"settingsModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"settings\" aria-hidden=\"true\">");

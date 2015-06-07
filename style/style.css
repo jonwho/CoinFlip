@@ -164,6 +164,10 @@ nav .icon-cog {
 }
 
 nav .btn-logout {
+    background-color: #2F5E66;
+    height:30px;
+    width: 50px;
+    border-style: none;
     right: 35px;
     top: 50%;
     margin-top: -15px;
@@ -171,12 +175,9 @@ nav .btn-logout {
 }
 
 nav .btn-logout:hover {
-    fill: #77EDFF;
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-    transform: scale(1.05);
+    background-color: #2F5E66;
+    height:30px;
+
 }
 
 nav .btn-email {
