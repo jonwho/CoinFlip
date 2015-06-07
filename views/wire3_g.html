@@ -35,6 +35,9 @@ var _rollbarConfig = {
     <script src="../js/team3.js"></script>
 
     <title>My Gold - CoinFlip</title>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
 </head>
 
 <body>
@@ -240,7 +243,7 @@ var _rollbarConfig = {
                         total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price'] * parseFloat(data.val()['gold'][itemIter]['qty'])), 2);
                         $(".gTable").append(
                                 "<tr onclick='document.location = \"wire4.html?" + itemIter + "&gold\";'>\
-                                    <td class='stack_img_col'><div class='coin_mini'></div></td>\
+                                    <td class='stack_img_col'><img src=\"" + data.val()['gold'][itemIter]['frnt'] + "\" + alt=\"N/A\" class=\"coin_img\"></td>\
                                     <td>" + data.val()['gold'][itemIter]['name'] + "</td>\
                                     <td>"+data.val()['gold'][itemIter]['qty']+"</td>\
                                     <td>"+data.val()['gold'][itemIter]['price']+"</td>\
@@ -293,12 +296,15 @@ var _rollbarConfig = {
                 }
                 if((total_priceS > 0) || (total_priceP > 0) || (total_priceG > 0)){
                     overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
+                                * ((sync['SI.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
                             + (total_priceG / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
-                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
+                                * ((sync['GC.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
+                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2))
+                                * ((sync['PLM15.NYM']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0));
                 }
-                overall_change = (((total_priceS + total_priceP + total_priceG) >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
-                $("#overall-change").html(overall_change);
-                ((total_priceS + total_priceP + total_priceG) >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
+                var overall_change_string = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
+                $("#overall-change").html(overall_change_string);
+                (overall_change >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
 
             });
         }

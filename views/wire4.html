@@ -33,6 +33,9 @@ var _rollbarConfig = {
     <script src="../js/main.js"></script>
 
     <title>Gold Item - CoinFlip</title>
+    <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
 </head>
 
 <body>
@@ -64,7 +67,7 @@ var _rollbarConfig = {
                 ITEM DETAIL
             </div>
             <div class="coin_main">
-                <a href="wire3_g.html">
+                <a id="backButton" href="wire3_g.html">
                     <div class="breadcrumb">
                         <svg class="icon icon-play-arrow-rev">
                             <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
@@ -127,7 +130,7 @@ var _rollbarConfig = {
                             <td>Total wt (ozt)</td>
                             <td id="twtTag"></td>
                         </tr>
-                        <tr>
+                        <tr id="diaRow">
                             <td>Diameter (mm)</td>
                             <td id="diaTag"></td>
                         </tr>
@@ -178,12 +181,13 @@ var _rollbarConfig = {
                 if(data.val()['type'] == 'coin'){
                     $("#diaTag").html(data.val()['dia']);
                 } else {
-                    $("#diaTag").remove();
+                    $("#diaRow").remove();
                 }
                 $(".img_circle").remove();
                 $(".img_box").append("<img id='frontImg' src='" + data.val()['frnt'] + "' alt='Coin'>");
                 $("#totalTag").html(roundResults((parseFloat(data.val()['price']) * parseFloat(data.val()['qty']) + parseFloat(data.val()['pre'])), 2).toString());
             }  
+        $("#backButton").attr("href", "wire3_" + querysplit[1].substring(0,1) + ".html");
         $(".coin_detail").append('<a href="update.html?' + querysplit[1] + '&' + querysplit[0] + '"><span id="update">Update Values</span></a>');
         $(".coin_detail").append('<a onClick="removeCoin()" href="wire3_' + querysplit[1].substring(0,1) + '.html"><span id="remove">Remove Set</span></a>');
 
@@ -194,6 +198,7 @@ var _rollbarConfig = {
         var query = location.href.substring((location.href.indexOf('?') + 1), location.href.length);
         var querysplit = query.split('&');
         new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).child(querysplit[1]).child(querysplit[0]).remove();
+        mixpanel.track("coin removed");
     }
 
     function receiveAggregateData(data){};
