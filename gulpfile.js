@@ -70,7 +70,7 @@ gulp.task('build-index', function () {
   
   return gulp.src(['index.html'])
   .pipe(assets)
-  .pipe(gulpif('js/**/*.js', uglify()))
+  //.pipe(gulpif('js/**/*.js', uglify()))
   .pipe(gulpif('style/style.css', minify()))
   .pipe(assets.restore())
   .pipe(useref())
@@ -97,7 +97,7 @@ gulp.task('build', ['build-index', 'build-fonts', 'build-assets'], function () {
     
   return gulp.src(['views/**/*.html'])
     .pipe(assets)
-    .pipe(gulpif('js/**/*.js', uglify()))
+    //.pipe(gulpif('js/**/*.js', uglify()))
     .pipe(gulpif('style/style.css', minify()))
     .pipe(assets.restore())
     .pipe(useref())
