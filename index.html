@@ -19,7 +19,7 @@
     <!-- endbuild -->
     <meta name=viewport content="width=device-width, initial-scale=.8, minimum-scale = .8, user-scalable=yes">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../views/favicon.ico" type="image/x-icon" />
     <script>
 var _rollbarConfig = {
     accessToken: "0e97d47296b8458584d2d9e35d2f0d49",
@@ -101,7 +101,6 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
               if (error) {
                 alert(error);
               } else {
-                console.log("Successfully created user account with uid:", userData.uid);
                 mixpanel.track("login successfully created");
                 alert("Account created! Please navigate back to the Login tab to enter!");
               }
@@ -115,8 +114,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                 email : $("#usernameL").val()
               }, function(error) {
               if (error === null) {
-                alert("Password reset email sent!");
-                console.log("Password reset email sent successfully");
+                alert("Password reset email sent! Remember to check your spam folder!");
               } else {
                 alert("Please speciify a valid email.");
                 console.log("Error sending password reset email:", error);
