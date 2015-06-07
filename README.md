@@ -2,6 +2,11 @@
 # Team 3 - Andrew Wang, Long Tran, Jonathan Ho, Kevin Tran
 
 # Write up - updated for HW5
+* Find our report at CSE134B_Team3.pdf
+
+## Development and distribution version
+* Development code is the root directory files/folders.
+* Distribution version of the app can be found in the dist directory.
 
 ## Improvements from HW4
 * Got saving coin stack to work in mobile view
