@@ -67,7 +67,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                 ITEM DETAIL
             </div>
             <div class="coin_main">
-                <a href="wire3_g.html">
+                <a id="backButton" href="wire3_g.html">
                     <div class="breadcrumb">
                         <svg class="icon icon-play-arrow-rev">
                             <symbol id="icon-play-arrow" viewBox="0 0 1024 1024">
@@ -187,6 +187,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                 $(".img_box").append("<img id='frontImg' src='" + data.val()['frnt'] + "' alt='Coin'>");
                 $("#totalTag").html(roundResults((parseFloat(data.val()['price']) * parseFloat(data.val()['qty']) + parseFloat(data.val()['pre'])), 2).toString());
             }  
+        $("#backButton").attr("href", "wire3_" + querysplit[1].substring(0,1) + ".html");
         $(".coin_detail").append('<a href="update.html?' + querysplit[1] + '&' + querysplit[0] + '"><span id="update">Update Values</span></a>');
         $(".coin_detail").append('<a onClick="removeCoin()" href="wire3_' + querysplit[1].substring(0,1) + '.html"><span id="remove">Remove Set</span></a>');
 
