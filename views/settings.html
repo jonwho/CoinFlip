@@ -59,7 +59,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
     loadTopNav();
     </script>
     <script type="text/javascript">
-    loadSideNav(2);
+    loadSideNav(4);
     </script>
     <section class="main-section">
         <section class="coin_wrapper">
@@ -76,9 +76,8 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                 CHANGE EMAIL
             </div>
         </section>
-        <div style="padding-top:30px">
-            <div class="panel panel-login">
-                <div class="panel-heading">
+        <div>
+                <div class="panel-heading" style="text-align:center">
                     <h2>Change your email</h2>
                 </div>
                 <form id="change-email-form" action="javascript:changeEmail()" style="display: block;">
@@ -86,16 +85,35 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                         <input type="text" name="email" id="oldEmail" tabindex="1" class="" placeholder="Old Email" value="">
                     </div>
                     <div class="change-email-group">
-                        <input type="text" name="email" id="newEmail" tabindex="1" class="" placeholder="New Email" value="">
+                        <input type="text" name="email" id="newEmail" tabindex="2" class="" placeholder="New Email" value="">
                     </div>
                     <div class="change-email-group">
-                        <input type="password" name="password" id="emailPass" tabindex="2" class="" placeholder="Password">
+                        <input type="password" name="password" id="emailPass" tabindex="3" class="" placeholder="Password">
                     </div>
                     <div class="change-email-group">
                         <input style="width: 40%;" type="submit" name="change-submit" id="change-submit" tabindex="4" class=" btn btn-login" value="Change Email">
                     </div>
                 </form>
-            </div>
+                <br>
+                <p style="text-align:center;font-size:2em"> OR </p>
+                <br>
+                <div class="panel-heading" style="text-align:center">
+                    <h2>Change your password</h2>
+                </div>
+                <form id="change-email-form" action="javascript:changePassword()" style="display: block;">
+                    <div class="change-email-group">
+                        <input type="text" name="email" id="currEmail" tabindex="5" class="" placeholder="Email" value="">
+                    </div>
+                    <div class="change-email-group">
+                        <input type="password" name="password" id="oldEmailPass" tabindex="6" class="" placeholder="Password">
+                    </div>
+                    <div class="change-email-group">
+                        <input type="password" name="password" id="newEmailPass" tabindex="7" class="" placeholder="Password">
+                    </div>
+                    <div class="change-email-group">
+                        <input style="width: 40%; background-color:green" type="submit" name="change-submit" id="change-submit" tabindex="8" class=" btn btn-login" value="Change password">
+                    </div>
+                </form>
         </div>
     </section>
     <script type="text/javascript">

@@ -35,6 +35,30 @@ function changeEmail() {
 	});
 }
 
+function changePassword() {
+	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+	ref.changePassword({
+	  email: $("#currEmail").val(),
+	  oldPassword: $("#oldEmailPass").val(),
+	  newPassword: $("#newEmailPass").val()
+	}, function(error) {
+	    if (error) {
+		    switch (error.code) {
+		      case "INVALID_PASSWORD":
+		        alert("The specified user account password is incorrect.");
+		        break;
+		      case "INVALID_USER":
+		        alert("The specified user account does not exist.");
+		        break;
+		      default:
+		        alert("Error changing password:", error);
+		    }
+	 	} else {
+	    	alert("User password changed successfully!");
+	  	}
+	});
+}
+
 function loadTopNav() {
 	document.write("    <nav>");
 	document.write("        <svg class=\"icon-spinner2\">");
@@ -62,7 +86,6 @@ function loadTopNavPersist() {
 	document.write("        <\/svg>");
 	document.write("        <a href=\"wire2.html\">COINFLIP<\/a>");
 	document.write("		<button class=\"btn-logout\" onclick=\"logout()\">Logout<\/button>");
-	document.write("		<button class=\"btn-email\" onclick=\"loadEmailChangePage()\">Change Email<\/button>");
 	document.write("    <\/nav>");
 }
 
@@ -111,6 +134,23 @@ function loadSideNav(selected) {
 	document.write("            Pt");
 	document.write("            <figcaption>My Platinum<\/figcaption>");
 	document.write("        <\/figure>");
+	document.write("        <\/a> ");
+	document.write("        <a href=\"settings.html\">");
+	if (selected == 4)
+		document.write("        <figure class='nav-selected'>");
+	else
+		document.write("        <figure>");
+	document.write("            <br\/>");
+	document.write("              <svg class=\"icon-setting\">");
+	document.write("                    <symbol id=\"icon-setting\" viewBox=\"0 0 1024 1024\">");
+	document.write("                        <title>settings<\/title>");
+	document.write("                		<path class=\"path1\" d=\"M933.79 610.25c-53.726-93.054-21.416-212.304 72.152-266.488l-100.626-174.292c-28.75 16.854-62.176 26.518-97.846 26.518-107.536 0-194.708-87.746-194.708-195.99h-201.258c0.266 33.41-8.074 67.282-25.958 98.252-53.724 93.056-173.156 124.702-266.862 70.758l-100.624 174.292c28.97 16.472 54.050 40.588 71.886 71.478 53.638 92.908 21.512 211.92-71.708 266.224l100.626 174.292c28.65-16.696 61.916-26.254 97.4-26.254 107.196 0 194.144 87.192 194.7 194.958h201.254c-0.086-33.074 8.272-66.57 25.966-97.218 53.636-92.906 172.776-124.594 266.414-71.012l100.626-174.29c-28.78-16.466-53.692-40.498-71.434-71.228zM512 719.332c-114.508 0-207.336-92.824-207.336-207.334 0-114.508 92.826-207.334 207.336-207.334 114.508 0 207.332 92.826 207.332 207.334-0.002 114.51-92.824 207.334-207.332 207.334z\"><\/path>");
+	document.write("                    <\/symbol>");
+	document.write("                    <use xlink:href=\"#icon-setting\"><\/use>");
+	document.write("                <\/svg>");
+	document.write("");
+	document.write("            <figcaption>Settings<\/figcaption>");
+	document.write("        <\/figure>       ");
 	document.write("        <\/a> ");
 	document.write("    <\/aside>");
 }
