@@ -19,7 +19,8 @@
 We think it best if the app was tested running on our Firebase app url.
 The app can be run [here](https://cse134bteam3-hw5.firebaseapp.com/). Also it
 would help to disable pop-up blockers so that Facebook's auth window appears
-on your machine.
+on your machine. Also note that GMail sends the reset password email to the
+spam folder, so it is noteworthy to check that folder.
 
 ## HTML Validation
 All of our HTML files validate with only a few warnings because of the use of
@@ -53,12 +54,16 @@ user they have 3 child references gold, silver, and platinum. These 3
 references hold many values where each value is a JSON format string to
 represent a purchase record. A purchase record holds info like date of
 purchase, quantity of coin in purchase, and amount in sales of purchase.
+We also store our database of frequently-traded assets within a child whose
+name reflect the metal and type (coin vs. bullion) of the asset.
 
 ## Data Collection
-We are using 2 sources for our app. For gold/silver/platinum futures we are
+We are using 3 sources for our app. For gold/silver/platinum futures we are
 periodically updating our live data through Yahoo's finance ticker in the
 COMEX/NYMEX commodity futures market. While for historical data on spot prices
 we are using Quandl's API to get data from the past based on London spot prices.
+We also populated our database of frequently traded assets with a webscraper
+gathering information from APMEX's precious metals trading page.
 
 ## Building the app
 We used JavaScript and jQuery whenever it made tasks easier. Most of the work
@@ -101,6 +106,16 @@ being called on and remove its from Firebase, which triggers a value change
 event and ultimately update the table once more time.
 
 ## User authentication
-We are using Facebook and Google as our third-party auth services. Another way to
-login is to use our email/password login form. These are implemented through
-Firebase APIs to manage and authenticate users to use our web application.
+To obtain authentication credentials, we support Google+ authentication, 
+Facebook authentication, and Firebase-based email/password authentication. 
+For users of email/password authentication, we maintain the options for 
+the user to change their email or their password upon logging in (via the
+left side bar). We also integrate a “Forgot Password?” link on the front
+page to send them via email a token password by which they could login to
+CoinFlip and change their password. These functions can be found in 
+main.js. Login credentials are set to expire after 24 hours.
+With this, we assign a unique UID to each user, then issue permission 
+only allowing users to access coin collections belonging to that UID. 
+Attempts to access pages of our application without authentication
+boots the user to the index page, on which he/she must sign in
+again.
