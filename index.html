@@ -91,10 +91,10 @@ var _rollbarConfig = {
               password : $("#passwordR").val()
             }, function(error, userData) {
               if (error) {
-                console.log($("#usernameR").val());
-                console.log("Error creating user:", error);
+                alert(error);
               } else {
                 console.log("Successfully created user account with uid:", userData.uid);
+                alert("Account created! Please navigate back to the Login tab to enter!");
               }
             });
 
@@ -181,7 +181,7 @@ var _rollbarConfig = {
                                         <div class="col-lg-12">
                                             <form id="login-form" action="javascript:loginUser()" style="display: block;">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" id="usernameL" tabindex="1" class="form-control" placeholder="Username" value="">
+                                                    <input type="text" name="username" id="usernameL" tabindex="1" class="form-control" placeholder="Email" value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="password" name="password" id="passwordL" tabindex="2" class="form-control" placeholder="Password">
@@ -204,9 +204,6 @@ var _rollbarConfig = {
                                                 </div>
                                             </form>
                                             <form id="register-form" action="javascript:createLogin()" method="post" role="form" style="display: none;">
-                                                <div class="form-group">
-                                                    <input type="text" name="username" id="usernameR" tabindex="1" class="form-control" placeholder="Username" value="">
-                                                </div>
                                                 <div class="form-group">
                                                     <input type="email" name="email" id="emailR" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                                 </div>

@@ -51,14 +51,14 @@ function saveDataToFirebase(username, id) {
     }
 
     // Simple validation check
-    if (type === "" || pdate === "" || qty === NaN || pre === NaN 
-            || price === NaN || pure === NaN || wu === NaN || 
-            gu === NaN || thk == NaN || oz === NaN || tlw === NaN) {
+    if (type === "" || pdate === "" || isNaN(qty) || isNaN(pre) 
+            || isNaN(price) || isNaN(pure) || isNaN(wu) || 
+            isNaN(gu) || isNaN(thk) || isNaN(oz) || isNaN(tlw)) {
         alert("Please provide valid inputs for all values before adding coin to collection!");
         return -1;
     }
     if(type == 'coin'){
-        if(dia === NaN){
+        if(isNaN(dia)){
             alert("Please provide valid inputs for all values before adding coin to collection!");
             return -1;
         }
