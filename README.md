@@ -13,6 +13,10 @@
 * Added logout to nav
 * Added settings to sidebar
 * Able to change email or password of user if logged in with email/pass auth
+* One step build process using Gulp
+* Default values for saving to stack
+* Rollbar analytics - error tracking and action tracking
+* CSS improvements
 
 
 ## For grading
