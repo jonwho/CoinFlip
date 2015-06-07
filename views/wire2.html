@@ -330,20 +330,19 @@ var _rollbarConfig = {
                 }
 
                 // Obtain proportion
-                if(total_priceS + total_priceP + total_priceG > 0){
-                    overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) 
-                                * parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
-                            + (total_priceG / (total_priceS + total_priceP + total_priceG)) 
-                                * parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
-                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) 
-                                * parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
-                    overall_change = ((overall_change >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
-                } else {
-                    overall_change = '+' + (0.0).toString() + '%';
+                if((total_priceS > 0) || (total_priceP > 0) || (total_priceG > 0)){
+                    overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
+                                * ((sync['SI.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
+                            + (total_priceG / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
+                                * ((sync['GC.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
+                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2))
+                                * ((sync['PLM15.NYM']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0));
                 }
+                overall_change = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
+                $(".total-change").html(overall_change);
+                (overall_change >= 0.0) ? $(".total-change").attr("class", "pos-change") : $(".total-change").attr("class", "neg-change");
                     
                 // Update fields
-                $(".total-change").html(overall_change);
                 $(".total-dollars").html("$" + (roundResults(total_priceS + total_priceG + total_priceP, 2)).toString());
             });
 

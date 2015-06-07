@@ -293,12 +293,15 @@ var _rollbarConfig = {
                 }
                 if((total_priceS > 0) || (total_priceP > 0) || (total_priceG > 0)){
                     overall_change = (total_priceS / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['SI.CMX']['changePercent'].substring(1, sync['SI.CMX']['changePercent'].length - 2))
+                                * ((sync['SI.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
                             + (total_priceG / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
-                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
+                                * ((sync['GC.CMX']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0))
+                            + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2))
+                                * ((sync['PLM15.NYM']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0));
                 }
-                overall_change = (((total_priceS + total_priceP + total_priceG) >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
+                overall_change = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
                 $("#overall-change").html(overall_change);
-                ((total_priceS + total_priceP + total_priceG) >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
+                (overall_change >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
 
             });
         }

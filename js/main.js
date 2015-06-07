@@ -640,8 +640,8 @@ $(window).load(function() {
 				datasets: [{
 					label: "Silver Total",
 					fillColor: "rgba(104, 206, 222, 0.05)",
-					strokeColor: "#FF6D67",
-					pointColor: "#FF6D67",
+					strokeColor: "#F3FF88",
+					pointColor: "#F3FF88",
 					pointStrokeColor: pointStroke,
 					pointHighlightFill: pointHighlightFill,
 					pointHighlightStroke: pointHighlightStroke,
@@ -714,8 +714,8 @@ $(window).load(function() {
 				datasets: [{
 					label: "Platinum Total",
 					fillColor: "rgba(104, 206, 222, 0.05)",
-					strokeColor: "#FF6D67",
-					pointColor: "#FF6D67",
+					strokeColor: "#FFA859",
+					pointColor: "#FFA859",
 					pointStrokeColor: pointStroke,
 					pointHighlightFill: pointHighlightFill,
 					pointHighlightStroke: pointHighlightStroke,
