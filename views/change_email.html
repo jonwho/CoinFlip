@@ -74,19 +74,18 @@ var _rollbarConfig = {
                 <div class="panel-heading">
                     <h2>Change your email</h2>
                 </div>
-                <form id="login-form" action="javascript:loginUser()" style="display: block;">
-                    <div class="form-group">
-                        <input type="text" name="username" id="usernameL" tabindex="1" class="" placeholder="Username" value="">
+                <form id="change-email-form" action="javascript:changeEmail()" style="display: block;">
+                    <div class="change-email-group">
+                        <input type="text" name="email" id="oldEmail" tabindex="1" class="" placeholder="Old Email" value="">
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="password" id="passwordL" tabindex="2" class="" placeholder="Password">
+                    <div class="change-email-group">
+                        <input type="text" name="email" id="newEmail" tabindex="1" class="" placeholder="New Email" value="">
                     </div>
-                    <div class="form-group">
-                        <div class="">
-                            <div class="">
-                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class=" btn btn-login" value="Log In">
-                            </div>
-                        </div>
+                    <div class="change-email-group">
+                        <input type="password" name="password" id="emailPass" tabindex="2" class="" placeholder="Password">
+                    </div>
+                    <div class="change-email-group">
+                        <input style="width: 40%;" type="submit" name="change-submit" id="change-submit" tabindex="4" class=" btn btn-login" value="Change Email">
                     </div>
                 </form>
             </div>
