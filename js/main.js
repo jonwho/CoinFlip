@@ -207,7 +207,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbq\" name=\"quantity\" value=\"" + data['qty'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbq\" name=\"quantity\" placeholder=\"1\" \/>";
+		strVar += "        <input id=\"fbq\" name=\"quantity\" placeholder=\"e.g. 1\" \/>";
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
@@ -217,7 +217,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbp\" name=\"quantity\" value=\"" + data['pre'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbp\" name=\"quantity\" placeholder=\"25.60\" \/>";
+		strVar += "        <input id=\"fbp\" name=\"quantity\" placeholder=\"e.g. 25.60\" \/>";
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
@@ -227,7 +227,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbpri\" name=\"quantity\" value=\"" + data['price'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbpri\" name=\"quantity\" placeholder=\"1250.60\" \/>";
+		strVar += "        <input id=\"fbpri\" name=\"quantity\" placeholder=\"e.g. 1250.60\" \/>";
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
@@ -238,7 +238,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbpure\" name=\"quantity\" value=\"" + data['pure'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbpure\" name=\"quantity\" placeholder=\"0.999\" \/>";
+		strVar += "        <input id=\"fbpure\" name=\"quantity\" placeholder=\"e.g. 0.999\" \/>";
 	}
 	strVar += "    <\/td>";
 
@@ -250,7 +250,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbwu\" name=\"quantity\" value=\"" + data['wu'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbwu\" name=\"quantity\" placeholder=\"1.244\" \/>";
+		strVar += "        <input id=\"fbwu\" name=\"quantity\" placeholder=\"e.g. 1.244\" \/>";
 	}
 	strVar += "    <\/td>";
 
@@ -262,7 +262,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbgu\" name=\"quantity\" value=\"" + data['gu'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbgu\" name=\"quantity\" placeholder=\"1.244\" \/>";
+		strVar += "        <input id=\"fbgu\" name=\"quantity\" placeholder=\"e.g. 1.244\" \/>";
 	}
 	strVar += "    <\/td>";
 
@@ -274,7 +274,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fboz\" name=\"quantity\" value=\"" + data['oz'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fboz\" name=\"quantity\" placeholder=\"0.0400\" \/>";
+		strVar += "        <input id=\"fboz\" name=\"quantity\" placeholder=\"e.g. 0.0400\" \/>";
 	}
 	strVar += "    <\/td>";
 
@@ -286,7 +286,7 @@ function loadForm(data, metal, type, values) {
 	if (data) {
 		strVar += "        <input id=\"fbtl\" name=\"quantity\" value=\"" + data['tlw'] + "\" \/>";
 	} else {
-		strVar += "        <input id=\"fbtl\" name=\"quantity\" placeholder=\"0.0400\" \/>";
+		strVar += "        <input id=\"fbtl\" name=\"quantity\" placeholder=\"e.g. 0.0400\" \/>";
 	}
 	strVar += "    <\/td>";
 
@@ -298,7 +298,7 @@ function loadForm(data, metal, type, values) {
 		if(data){
 			strVar += "		<input id=\"fbdia\" name=\"quantity\" value=\"" + data['dia'] + "\" \/>";
 		} else {
-			strVar += "		<input id=\"fbdia\" name=\"quantity\" placeholder=\"30.00\" \/>";
+			strVar += "		<input id=\"fbdia\" name=\"quantity\" placeholder=\"e.g. 30.00\" \/>";
 		}
 		strVar += "    <\/td>";
 		strVar += "<\/tr>";
@@ -309,7 +309,7 @@ function loadForm(data, metal, type, values) {
 	if(data){
 		strVar += "		<input id=\"fbthk\" name=\"quantity\" value=\"" + data['thk'] + "\" \/>";
 	} else {
-		strVar += "		<input id=\"fbthk\" name=\"quantity\" placeholder=\"2.9\" \/>";
+		strVar += "		<input id=\"fbthk\" name=\"quantity\" placeholder=\"e.g. 2.9\" \/>";
 	}
 	strVar += "    <\/td>";
 	strVar += "<\/tr>";
