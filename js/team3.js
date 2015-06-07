@@ -9,13 +9,6 @@
 
 var myFirebaseRef = new Firebase("https://cse134bteam3-hw5.firebaseio.com/");
 
-// define Firebase refs to use depending on page
-var fAuthRef = myFirebaseRef.child("auth");
-var fProfileRef = myFirebaseRef.child("profile");
-var fGoldRef = myFirebaseRef.child("gold");
-var fSilverRef = myFirebaseRef.child("silver");
-var fPlatinumRef = myFirebaseRef.child("platinum");
-
 /**************************************
  * saveDataToFirebase(username, id) :
  *
