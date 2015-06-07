@@ -304,10 +304,6 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
             document.getElementById("pchange").innerHTML = sync['PLM15.NYM']['change'];
             (sync['PLM15.NYM']['change'].substring(0,1) == '+') ? document.getElementById("pchange").setAttribute("class", "pos-change") : document.getElementById("pchange").setAttribute("class", "neg-change")
 
-            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("goldCoins").on("value", function(data){
-                console.log(data.val());
-            });
-
             // Query firebase for data on coins to provide overview data
             new Firebase("https://cse134bteam3-hw5.firebaseio.com")
                         .child("users")
