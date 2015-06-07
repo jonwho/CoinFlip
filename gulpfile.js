@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
+var rimraf = require('gulp-rimraf');
 var reload = browserSync.reload;
 
 // build a css file of only used classes removing unused css classes
@@ -26,11 +27,6 @@ gulp.task('minify', ['uncss'], function() {
     .pipe(minify({compatibility: 'ie8'}))
     .pipe(gulp.dest('dist/css/style.min.css'));
 });
-
-// prepare production ready code into dist directory
-// gulp.task('build', ['minify', 'uglifyjs'], function() {
-//   console.log("Done.");
-// });
 
 // get jshint all js files then concat them into coinflip.min.js
 // uglify coinflip.min.js
@@ -65,6 +61,11 @@ gulp.task('browser-sync', ['lint'], function() {
 // gulp with no args runs this task
 gulp.task('default', ['browser-sync']);
 
+// delete the dist directory
+gulp.tast('clean-dist', function() {
+  rimraf.('./dist');
+});
+
 gulp.task('build-index', function () {
   var assets = useref.assets();
   
@@ -92,7 +93,7 @@ gulp.task('build-firebase', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['build-index', 'build-fonts', 'build-assets'], function () {
+gulp.task('build', ['clean-dist', 'build-index', 'build-fonts', 'build-assets'], function () {
   var assets = useref.assets();
     
   return gulp.src(['views/**/*.html'])
