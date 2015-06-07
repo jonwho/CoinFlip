@@ -163,22 +163,19 @@ nav .icon-cog {
     right: 35px;
 }
 
-nav .btn-logout {
+nav .logoutLink {
     background-color: transparent;
     font-family: "monster_h", sans-serif;
     font-weight: 600;
     color: white;
-    height:30px;
     width: 50px;
     border-style: none;
     right: 35px;
-    top: 50%;
-    margin-top: -15px;
     font-size: 15px;
     position: absolute;
 }
 
-nav .btn-logout:hover {
+nav .logoutLink:hover {
     opacity: 0.85;
 }
 
@@ -397,9 +394,7 @@ body {
 }
 .panel-login {
     border-color: #ccc;
-    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+
 }
 .panel-login>.panel-heading {
     color: #00415d;

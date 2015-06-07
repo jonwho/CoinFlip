@@ -69,7 +69,7 @@ function loadTopNav() {
 	document.write("            <use xlink:href=\"#icon-spinner2\"><\/use>");
 	document.write("        <\/svg>");
 	document.write("        <a href=\"wire2.html\">COINFLIP<\/a>");
-	document.write("		<button class=\"btn-logout\" onclick=\"logout()\">Logout<\/button>");
+	document.write("		<a class=\"logoutLink\" href=\"javascript:logout()\">Logout<\/a>");
 	document.write("    <\/nav>");
 }
 
@@ -83,7 +83,7 @@ function loadTopNavPersist() {
 	document.write("            <use xlink:href=\"#icon-spinner2\"><\/use>");
 	document.write("        <\/svg>");
 	document.write("        <a href=\"wire2.html\">COINFLIP<\/a>");
-	document.write("		<button class=\"btn-logout\" onclick=\"logout()\">Logout<\/button>");
+	document.write("		<a class=\"logoutLink\" href=\"javascript:logout()\">Logout<\/a>");
 	document.write("    <\/nav>");
 }
 
