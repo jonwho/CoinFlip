@@ -165,20 +165,41 @@ nav .icon-cog {
     right: 35px;
 }
 
-nav .btn {
+nav .btn-logout {
     right: 35px;
     top: 50%;
     margin-top: -15px;
     position: absolute;
 }
 
+nav .btn-logout:hover {
+    fill: #77EDFF;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+nav .btn-email {
+    right: 105px;
+    top: 50%;
+    margin-top: -15px;
+    position: absolute;
+}
+
+nav .btn-email:hover {
+    fill: #77EDFF;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
 nav a {
     text-decoration: none;
     color: #E6E6E6;
-}
-
-.modal {
-    color: black;
 }
 
 .mobile-nav {
