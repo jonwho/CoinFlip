@@ -1,27 +1,23 @@
---- TODO FOR THIS ASSIGNMENT -- 
-[in progress] fix all major bugs
-[]		login services (Facebook?)
-[]		current price of metals from Quandl
-[LT]	Grunt.js
-[]		Mixpanel for analytics
-[LT done]	Rollbar for error tracking
-[]	README
-
 # HOMEWORK 5
 # Team 3 - Andrew Wang, Long Tran, Jonathan Ho, Kevin Tran
 
-## Before submission
-* Check HTML & CSS validation
-* Browser compatibility
-* README describes how you built your app
-* Note down your team's questions and concerns
-* Note down other useful information for graders
-
 # Write up
+
+## Improvements from HW4
+* Got saving coin stack to work in mobile view
+* Added Google auth
+* Added email/pass auth login
+* Added email/pass registration
+* Added coin/buillion pictures
+* Added types of coin/buillion
+* Added logout to nav
+* Added settings to sidebar
+* Able to change email or password of user if logged in with email/pass auth
+
 
 ## For grading
 We think it best if the app was tested running on our Firebase app url.
-The app can be run [here](https://cse134bteam3.firebaseapp.com/). Also it
+The app can be run [here](https://cse134bteam3-hw5.firebaseapp.com/). Also it
 would help to disable pop-up blockers so that Facebook's auth window appears
 on your machine.
 
@@ -31,7 +27,7 @@ a section tag without a h2-h6 element to identify headings. Otherwise the
 HTML files validate just fine.
 
 ## CSS Validation
-We use Dream Team's CSS file style.css and Bootstrap's bootstrap.css to style
+We use Dream Team's CSS file style.css and jquery-ui.css to style 
 our app. When running a CSS validator on these files we get back a few errors.
 However that is a part of using Sass and compiling it back to CSS. For rules
 defined in Sass it does not always compile back to a complete valid CSS file.
@@ -48,9 +44,7 @@ remained uniform across the 3 browsers. The mobile experience is also easy
 to navigate and use. We were worried about scaling of the charts for
 different ranges of time but other than some margins being longer or
 shorter than others, the mobile experience works well on phone and small
-view ports in the browser. However one issue we ran into when testing
-on mobile was that saving a coin to the stack wasn't possible because
-the form was lost for mobile view.
+view ports in the browser. 
 
 ## Firebase Schema
 To save multiple users and their coin stack we made a users reference to hold
@@ -68,15 +62,18 @@ we are using Quandl's API to get data from the past based on London spot prices.
 
 ## Building the app
 We used JavaScript and jQuery whenever it made tasks easier. Most of the work
-involved working with Firebase APIs to implement CRUD operations. The only use
-of Bootstrap's CSS was in the login.html page so there was a lot of unused
-portions of Bootstrap. Using Gulp like we did in Homework 3 we did a uncss
-task on Bootstrap to build a CSS file for only the components we used. This
-Gulp task also proved useful for Dream Team's style.css file as there were
-a few unused implementations. To avoid an entirely monolithic JavaScript file
-we put our JavaScript code into team3.js separate from Dream Team's main.js
-file. Our team3.js file includes all our work that we needed to tie Firebase
-data into our views and features that updated our Firebase datastore.
+involved working with Firebase APIs to implement CRUD operations. To avoid an 
+entirely monolithic JavaScript file we put our JavaScript code into team3.js 
+separate from Dream Team's main.js file. Our team3.js file includes all our 
+work that we needed to tie Firebase data into our views and features that 
+updated our Firebase datastore. For some changing email/pass and logout functions
+we implemented those in main.js so logical groupings made code easier to read
+in the future. More detailed in our report is how we built the app for
+distribution. To quickly summarize here we made a one step build possible by
+using gulp to build and package our app into a dist directory. The newly built
+dist directory is ready for production because it concatenates multiple CSS
+and JavaScript files to combined.css and combined.js respectively. Thus making
+it easier and quicker to serve.
 
 ## CRUD Implementation
 For Create, we assigned a unique ID to each tag in the Add screen view. Users
@@ -104,10 +101,6 @@ being called on and remove its from Firebase, which triggers a value change
 event and ultimately update the table once more time.
 
 ## User authentication
-
-For now, we support utilizing Firebase's Facebook user authentication system to
-assign a unique UID to each user, then issue permission only allowing users
-to access coin collections belonging to that UID.  Attempts to access pages of
-our application without authentication boots the user to the index page, on
-which he/she must sign in via Facebook. We plan on expanding this
-support to Google and email/password combinations in the future.
+We are using Facebook and Google as our third-party auth services. Another way to
+login is to use our email/password login form. These are implemented through
+Firebase APIs to manage and authenticate users to use our web application.
