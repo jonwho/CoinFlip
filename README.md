@@ -4,7 +4,7 @@
 []		current price of metals from Quandl
 [LT]	Grunt.js
 []		Mixpanel for analytics
-[LT]	Rollbar for error tracking
+[LT done]	Rollbar for error tracking
 []	README
 
 # HOMEWORK 5
