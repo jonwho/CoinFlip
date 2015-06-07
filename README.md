@@ -16,8 +16,6 @@
 * UI/UX
     * Implemented many fine tweaks to the CSS and layout in response to test subject feedback to improve aesthetics. For example, we moved the optional account management system to the left sidebar and replace it with the Logout button due to users finding the Logout functionality more worthy of the top-right corner real estate.
 
-
-
 ## For grading
 We think it best if the app was tested running on our Firebase app url.
 The app can be run [here](https://cse134bteam3-hw5.firebaseapp.com/). Also it
