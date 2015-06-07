@@ -296,8 +296,8 @@ var _rollbarConfig = {
                             + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2))
                                 * ((sync['PLM15.NYM']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0));
                 }
-                overall_change = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
-                $("#overall-change").html(overall_change);
+                var overall_change_string = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
+                $("#overall-change").html(overall_change_string);
                 (overall_change >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
             });
         }

@@ -305,7 +305,7 @@ var _rollbarConfig = {
                         .child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid)
                         .on("value", function(data){ 
                 // Calculate portfolio change based on proportion of portfolio allocated to metals
-                var overall_change;
+                var overall_change = 0.0;
                 var total_priceS = 0.0;
                 var total_priceG = 0.0;
                 var total_priceP = 0.0;
@@ -338,8 +338,8 @@ var _rollbarConfig = {
                             + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2))
                                 * ((sync['PLM15.NYM']['changePercent'].substring(0, 1) == '+') ? (1.0) : (-1.0));
                 }
-                overall_change = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
-                $(".total-change").html(overall_change);
+                var overall_change_string = (overall_change >= 0.0 ? '+' : '').toString() + roundResults(overall_change, 3) + "%";
+                $(".total-change").html(overall_change_string);
                 (overall_change >= 0.0) ? $(".total-change").attr("class", "pos-change") : $(".total-change").attr("class", "neg-change");
                     
                 // Update fields

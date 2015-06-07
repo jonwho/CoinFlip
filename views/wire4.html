@@ -127,7 +127,7 @@ var _rollbarConfig = {
                             <td>Total wt (ozt)</td>
                             <td id="twtTag"></td>
                         </tr>
-                        <tr>
+                        <tr id="diaRow">
                             <td>Diameter (mm)</td>
                             <td id="diaTag"></td>
                         </tr>
@@ -178,7 +178,7 @@ var _rollbarConfig = {
                 if(data.val()['type'] == 'coin'){
                     $("#diaTag").html(data.val()['dia']);
                 } else {
-                    $("#diaTag").remove();
+                    $("#diaRow").remove();
                 }
                 $(".img_circle").remove();
                 $(".img_box").append("<img id='frontImg' src='" + data.val()['frnt'] + "' alt='Coin'>");
