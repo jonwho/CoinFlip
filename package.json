@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.7.5",
+    "del": "^1.2.0",
     "gulp": "^3.8.11",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.11.0",

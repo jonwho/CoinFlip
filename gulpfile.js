@@ -6,6 +6,7 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
+var del = require('del');
 var reload = browserSync.reload;
 
 // build a css file of only used classes removing unused css classes
@@ -26,11 +27,6 @@ gulp.task('minify', ['uncss'], function() {
     .pipe(minify({compatibility: 'ie8'}))
     .pipe(gulp.dest('dist/css/style.min.css'));
 });
-
-// prepare production ready code into dist directory
-// gulp.task('build', ['minify', 'uglifyjs'], function() {
-//   console.log("Done.");
-// });
 
 // get jshint all js files then concat them into coinflip.min.js
 // uglify coinflip.min.js
@@ -62,10 +58,27 @@ gulp.task('browser-sync', ['lint'], function() {
   gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
 });
 
+// lints files first then loads app to browser
+gulp.task('serve-dist', ['lint'], function() {
+  browserSync.init({
+    server: {
+      baseDir: './dist/'
+    }
+  });
+
+  // sync the browser when these files change
+  gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
+});
+
 // gulp with no args runs this task
 gulp.task('default', ['browser-sync']);
 
-gulp.task('build-index', function () {
+// delete the dist directory
+gulp.task('clean-dist', function(cb) {
+  del(['dist'], cb);
+});
+
+gulp.task('build-index', ['clean-dist'], function () {
   var assets = useref.assets();
   
   return gulp.src(['index.html'])
@@ -77,17 +90,17 @@ gulp.task('build-index', function () {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build-fonts', function () {
+gulp.task('build-fonts', ['clean-dist'], function () {
   return gulp.src('fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 });
 
-gulp.task('build-assets', function () {
+gulp.task('build-assets', ['clean-dist'], function () {
   return gulp.src('assets/**/*')
     .pipe(gulp.dest('dist/assets'));
 });
 
-gulp.task('build-firebase', function () {
+gulp.task('build-firebase', ['clean-dist'], function () {
   return gulp.src('firebase.json')
     .pipe(gulp.dest('dist'));
 });
