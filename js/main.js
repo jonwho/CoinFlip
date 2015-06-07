@@ -1,15 +1,23 @@
-/* This comment here stops the build from commenting out some code below */
+/* This comment here stops the gulp build task from commenting out some code below */
 
+/**************************************
+ * logout() :
+ *
+ * Function used to logout a user authenticated by Firebase and
+ * then redirect them to login/register page.
+ */
 function logout() {
 	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
 	this.ref.unauth();
 	document.location = "../index.html";
 }
 
-function loadEmailChangePage() {
-	document.location = "../views/change_email.html";
-}
-
+/**************************************
+ * changeEmail() :
+ *
+ * Function used to change the current authenticated user's email
+ * to another email the user wishes to use instead.
+ */
 function changeEmail() {
 	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
 	
@@ -35,6 +43,12 @@ function changeEmail() {
 	});
 }
 
+/**************************************
+ * changePassword() :
+ *
+ * Function used to change the authenticated user's password to another
+ * password the user wishes to use.
+ */
 function changePassword() {
 	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
 	ref.changePassword({
@@ -59,6 +73,14 @@ function changePassword() {
 	});
 }
 
+/**************************************
+ * loadTopNav() :
+ *
+ * Function used load a partial html. This is for
+ * pages that are also mobile friendly pages. If
+ * resized to mobile view this top nav is dropped
+ * for the mobile view.
+ */
 function loadTopNav() {
 	document.write("    <nav>");
 	document.write("        <svg class=\"icon-spinner2\">");
@@ -73,6 +95,13 @@ function loadTopNav() {
 	document.write("    <\/nav>");
 }
 
+/**************************************
+ * loadTopNavPersist() :
+ *
+ * Function used load a partial html. This is for
+ * pages that will always use this top nav. It will
+ * not be replaced by the mobile top nav if resized.
+ */
 function loadTopNavPersist() {
 	document.write("    <nav style='display: block; visibility: visible;'>");
 	document.write("        <svg class=\"icon-spinner2\">");
@@ -87,6 +116,14 @@ function loadTopNavPersist() {
 	document.write("    <\/nav>");
 }
 
+
+/**************************************
+ * loadSideNav() :
+ *
+ * Function used load a partial html. This is for
+ * the desktop view.
+ * - selected - the selected page to load
+ */
 function loadSideNav(selected) {
 	document.write("    <aside>");
 	document.write("        <a href=\"wire2.html\">");
@@ -155,14 +192,18 @@ function loadSideNav(selected) {
 	document.write("    <\/aside>");
 }
 
+/**************************************
+ * loadFooter() :
+ *
+ * Function used load a partial html. This is for
+ * all pages.
+ */
 function loadFooter() {
 	document.write("    <footer>");
 	document.write("        &copy; 2015 CoinFlip");
 	document.write("    <\/footer> ");
 
 }
-
-
 
 /**************************************
  * loadForm(data, metal) :
