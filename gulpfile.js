@@ -9,7 +9,10 @@ var gulpif = require('gulp-if');
 var del = require('del');
 var reload = browserSync.reload;
 
-// build a css file of only used classes removing unused css classes
+/*
+ * Checks if the HTML files actually use all the the CSS
+ * if not then only build a CSS file that has classes used.
+ */
 gulp.task('uncss', function() {
   return gulp.src('style/style.css') 
     .pipe(uncss({
@@ -21,32 +24,32 @@ gulp.task('uncss', function() {
     .pipe(gulp.dest('dist/css'));
 });
 
-// minify css in dist/css directory
+/*
+ * Minifies the uncss'd version to save on file size.
+ */
 gulp.task('minify', ['uncss'], function() {
   return gulp.src('dist/css/style.css')
     .pipe(minify({compatibility: 'ie8'}))
     .pipe(gulp.dest('dist/css/style.min.css'));
 });
 
-// get jshint all js files then concat them into coinflip.min.js
-// uglify coinflip.min.js
-// save uglify'd coinflip.min.js to dist/js directory
-gulp.task('uglifyjs', function() {
-  return gulp.src('js/**/*.js')
-    .pipe(jshint())
-    .pipe(concat('coinflip.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'))
-})
-
-// linter for JavaScript
+/*
+ * Linter that notifies us if we write
+ * bad JavaScript based on jshintrc settings.
+ */
 gulp.task('lint', function() {
   return gulp.src('/scripts/*.js')
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-// lints files first then loads app to browser
+/*
+ * Loads our app and reloads whenever the files we
+ * watch change. This task saves us time on refreshing
+ * our browsers and it syncs to all open browsers.
+ * i.e. can test on the big 3 Firefox, Chrome, and IE
+ * at once since it syncs user usage.
+ */
 gulp.task('browser-sync', ['lint'], function() {
   browserSync.init({
     server: {
@@ -58,7 +61,10 @@ gulp.task('browser-sync', ['lint'], function() {
   gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
 });
 
-// lints files first then loads app to browser
+/*
+ * Same task as browser-sync excpe this time it's
+ * serving the distribution version of the app.
+ */
 gulp.task('serve-dist', ['lint'], function() {
   browserSync.init({
     server: {
@@ -70,14 +76,19 @@ gulp.task('serve-dist', ['lint'], function() {
   gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
 });
 
-// gulp with no args runs this task
-gulp.task('default', ['browser-sync']);
-
-// delete the dist directory
+/*
+ * Deletes the dist directory. Uses a callback so
+ * that other tasks have to wait on this task to
+ * finish first before running itself.
+ */
 gulp.task('clean-dist', function(cb) {
   del(['dist'], cb);
 });
 
+/*
+ * Builds the assets for index.html and had to do
+ * this separate because of file structure.
+ */
 gulp.task('build-index', ['clean-dist'], function () {
   var assets = useref.assets();
   
@@ -90,21 +101,35 @@ gulp.task('build-index', ['clean-dist'], function () {
   .pipe(gulp.dest('dist'));
 });
 
+/*
+ * Builds fonts to dist.
+ */
 gulp.task('build-fonts', ['clean-dist'], function () {
   return gulp.src('fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 });
 
+/*
+ * Builds assets to dist.
+ */
 gulp.task('build-assets', ['clean-dist'], function () {
   return gulp.src('assets/**/*')
     .pipe(gulp.dest('dist/assets'));
 });
 
+/*
+ * Builds firebase.json to dist. Useful if you're using
+ * the 'firebase deploy' command to serve in production.
+ */
 gulp.task('build-firebase', ['clean-dist'], function () {
   return gulp.src('firebase.json')
     .pipe(gulp.dest('dist'));
 });
 
+/*
+ * Calls the other build tasks to run concurrently and also
+ * builds the views to dist.
+ */
 gulp.task('build', ['build-index', 'build-fonts', 'build-assets'], function () {
   var assets = useref.assets();
     
@@ -116,3 +141,9 @@ gulp.task('build', ['build-index', 'build-fonts', 'build-assets'], function () {
     .pipe(useref())
     .pipe(gulp.dest('dist/views'));
 });
+
+/*
+ * The default gulp task that runs when
+ * no tasks are supplied.
+ */
+gulp.task('default', ['browser-sync']);
