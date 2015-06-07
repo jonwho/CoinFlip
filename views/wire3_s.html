@@ -242,7 +242,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                     // Append row to table for coin entry
                     $(".sTable").append(
                             "<tr onclick='document.location = \"wire4.html?" + itemIter + "&silver\";'>\
-                                <td class='stack_img_col'><div class='coin_mini'></div></td>\
+                                <td class='stack_img_col'><img src=\"" + data.val()['silver'][itemIter]['frnt'] + "\" + alt=\"N/A\" class=\"coin_img\"></td>\
                                 <td>" + data.val()['silver'][itemIter]['name'] + "</td>\
                                 <td>"+data.val()['silver'][itemIter]['qty']+"</td>\
                                 <td>"+data.val()['silver'][itemIter]['price']+"</td>\

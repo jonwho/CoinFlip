@@ -243,7 +243,7 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                         total_price = roundResults(total_price + parseFloat(data.val()['gold'][itemIter]['price'] * parseFloat(data.val()['gold'][itemIter]['qty'])), 2);
                         $(".gTable").append(
                                 "<tr onclick='document.location = \"wire4.html?" + itemIter + "&gold\";'>\
-                                    <td class='stack_img_col'><div class='coin_mini'></div></td>\
+                                    <td class='stack_img_col'><img src=\"" + data.val()['gold'][itemIter]['frnt'] + "\" + alt=\"N/A\" class=\"coin_img\"></td>\
                                     <td>" + data.val()['gold'][itemIter]['name'] + "</td>\
                                     <td>"+data.val()['gold'][itemIter]['qty']+"</td>\
                                     <td>"+data.val()['gold'][itemIter]['price']+"</td>\
