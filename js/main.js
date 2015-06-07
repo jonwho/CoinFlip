@@ -33,6 +33,30 @@ function changeEmail() {
 	});
 }
 
+function changePassword() {
+	var ref = new Firebase("https://cse134bteam3-hw5.firebaseio.com");
+	ref.changePassword({
+	  email: $("#currEmail").val(),
+	  oldPassword: $("#oldEmailPass").val(),
+	  newPassword: $("#newEmailPass").val()
+	}, function(error) {
+	    if (error) {
+		    switch (error.code) {
+		      case "INVALID_PASSWORD":
+		        alert("The specified user account password is incorrect.");
+		        break;
+		      case "INVALID_USER":
+		        alert("The specified user account does not exist.");
+		        break;
+		      default:
+		        alert("Error changing password:", error);
+		    }
+	 	} else {
+	    	alert("User password changed successfully!");
+	  	}
+	});
+}
+
 function loadTopNav() {
 	document.write("    <nav>");
 	document.write("        <svg class=\"icon-spinner2\">");
