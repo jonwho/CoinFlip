@@ -94,12 +94,9 @@ function saveDataToFirebase(username, id) {
         };
     }
 
-    //console.log(data);
-
     if (id == "") {   // Used to create data
         myFirebaseRef.child("users").child(username).child(metal).push(data);
     } else {          // Used to update data
-        //console.log(username+" V " + metal + " V " + id);
         myFirebaseRef.child("users").child(username)
             .child(metal).child(id).set(data);
     }

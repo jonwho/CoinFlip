@@ -1,7 +1,7 @@
 # HOMEWORK 5
 # Team 3 - Andrew Wang, Long Tran, Jonathan Ho, Kevin Tran
 
-# Write up
+# Write up - updated for HW5
 
 ## Improvements from HW4
 * Got saving coin stack to work in mobile view
@@ -18,6 +18,17 @@
 * Rollbar analytics - error tracking and action tracking
 * CSS improvements
 
+* Test subjects reported that a lack of knowledge of existing coins/bullions presented a formidable challenge towards building a portfolio effectively. 
+    * We populated a database of frequently traded coins and bullion bars and redesigned our creation/update page to be centered around these coins and bars
+    * Overhaul of update page resulted in it now dynamically loading default data into the fields based on the user-selected coin
+* Account management system
+    * We now support not only Facebook authentication, but Google+ and email/password combinations as well
+    * Implemented full account management capabilities - changing email, changing password, and password reset email functions
+* Build/Analytics
+    * Added Rollbar error tracking and Mixpanel action tracking to gathering information regarding our application’s performance
+    * Wrote build automation script to compile production release of application
+* UI/UX
+    * Implemented many fine tweaks to the CSS and layout in response to test subject feedback to improve aesthetics. For example, we moved the optional account management system to the left sidebar and replace it with the Logout button due to users finding the Logout functionality more worthy of the top-right corner real estate.
 
 ## For grading
 We think it best if the app was tested running on our Firebase app url.
@@ -86,7 +97,11 @@ it easier and quicker to serve.
 
 ## CRUD Implementation
 For Create, we assigned a unique ID to each tag in the Add screen view. Users
-are expected to filled out all of the fields. Upon clicking on the "Saved" button
+are expected to select one of the pre-defined, commonly-traded coins that we
+have populated from our Firebase servers. Update selection, the fields relevant
+to the physical properties of the coin will automatically be filled out, leaving
+the user to just fill out the price and premium they bought the coin at, the  
+quantity of asset, and the date of purchase. Upon clicking on the "Saved" button
 our Javascript function uses jQuery to pull the values from these fields based
 on the unique IDs mentioend above. We perform a set of data validation checks
 to ensure that all fields are filled correctly (For example, String fields cannot
@@ -102,7 +117,11 @@ create an entry for a coin on Firebase, each entry is assigned a unique Firebase
 database. For each row in the table that displays the database's data, we assign
 each of these unique ID to the item. Although the update fields are  the same
 throughout, a call to the "Save" button will only access the specified entry in
-Firebase. 
+Firebase. Note that since HW4, we have locked the metal type, asset type, name,
+and purchase fields when updating an element. The rationale behind this is that
+if you are going to change any of these fields that are critical to defining
+a numismatic asset, then it is crucial to simply delete the entry and create
+a new one. 
 
 For Delete, it is pretty much the same exact logic as Update except much simpler.
 Once the call to the Delete button is fired, we get the unique Id of the item

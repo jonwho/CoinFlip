@@ -117,7 +117,6 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
                 alert("Password reset email sent! Remember to check your spam folder!");
               } else {
                 alert("Please speciify a valid email.");
-                //console.log("Error sending password reset email:", error);
               }
             });                        
         }
@@ -129,10 +128,8 @@ mixpanel.init("42eb1d8c22be63ebd9b828f7c8480669");</script><!-- end Mixpanel -->
               password : $("#passwordL").val()
             }, function(error, authData) {
               if (error) {
-                //console.log("Login Failed!", error);
               } else {
                 mixpanel.track("authenticated successfully with payload");
-                //console.log("Authenticated successfully with payload:", authData);
                 document.location = "./views/wire2.html";
               }
             });
