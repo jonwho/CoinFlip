@@ -30,10 +30,10 @@ function saveDataToFirebase(username, id) {
     }
 
     // Retrieve input data for coin
-    var metal = $("#fbm :selected").val();
+    var metal = $("#fbm").val();
     var newqty = 0;
-    var name = $("#fbn").val().toString();
-    var type = $("#fbt :selected").val();
+    var name = $("#fbn").val();
+    var type = $("#fbt").val();
     var pdate = $("#fbpd").val();
     var qty = parseInt($("#fbq").val());
     var pre = parseFloat($("#fbp").val());
@@ -106,6 +106,7 @@ function saveDataToFirebase(username, id) {
     if (id == "") {   // Used to create data
         myFirebaseRef.child("users").child(username).child(metal).push(data);
     } else {          // Used to update data
+        console.log(username+" V " + metal + " V " + id);
         myFirebaseRef.child("users").child(username)
             .child(metal).child(id).set(data);
     }

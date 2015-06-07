@@ -176,16 +176,19 @@ var _rollbarConfig = {
 
 
         window.onload = function(){
-            if(location.href.indexOf('&') >= 0){ // We are adding a new coin
-                new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users")
-                        .child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid)
-                        .child(querysplit[0]).child(querysplit[1]).on("value", function(data){ 
-                    $("#updateForm").html(loadForm(data.val(), querysplit[0], 'coin'));
-                });
-                // Change saveData arguments appropriately
-                $("#save").attr("onClick", "saveDataToFirebase('" + ((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).toString() + "', '" + querysplit[1] + "')");
-            } else { // We are updating an old coin's entry
-                new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
+            
+            new Firebase("https://cse134bteam3-hw5.firebaseio.com").child(childName).on("value", function(data){
+                if(location.href.indexOf('&') >= 0){ // We are adding a new coin
+                    new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users")
+                            .child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid)
+                            .child(querysplit[0]).child(querysplit[1]).on("value", function(idata){ 
+                        $("#updateForm").html(loadForm(idata.val(), querysplit[0], 'coin', data.val()));
+                        $(".img_circle").remove();
+                        $(".img_box").append("<img id='frontImg' src='" + idata.val()['frnt'] + "' alt='Coin'>");
+                    });
+                    // Change saveData arguments appropriately
+                    $("#save").attr("onClick", "saveDataToFirebase('" + ((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).toString() + "', '" + querysplit[1] + "')");
+                } else {
                     $("#updateForm").html(loadForm(0, query, 'coin', data.val()));
                     $(function() {
                         $( "#fbpd" ).datepicker();
@@ -199,9 +202,10 @@ var _rollbarConfig = {
                         break;
                     }
                     fillData($("#fbn"));
-                });
+                }
+            });
                 
-            }
+            
         }
         // Load default date
         $("fbpd").attr("value", getDate());

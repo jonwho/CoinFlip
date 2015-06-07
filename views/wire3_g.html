@@ -230,9 +230,7 @@ var _rollbarConfig = {
 
         // Kick off live stream
         retrieveCurrentMetalsPrices(['SI.CMX', 'GC.CMX', 'PLM15.NYM']);
-        new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("goldCoins").on("value", function(data){
-            console.log(data);
-        });
+
         // Query coin data from Firebase back-end using auth UID.
         new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
             var total_price = 0.0;
@@ -271,6 +269,8 @@ var _rollbarConfig = {
             document.getElementById("gask").innerHTML = sync['GC.CMX']['ask'];
             document.getElementById("gchange").innerHTML = sync['GC.CMX']['change'];
             $("#daily-change").html(sync['GC.CMX']['changePercent']);
+            (sync['GC.CMX']['changePercent'].substring(0,1) == '+') ? $("#daily-change").attr("class", "pos-change") : $("#daily-change").attr("class", "neg-change");
+
             // Query firebase for data on coins to provide overview data
             (sync['GC.CMX']['change'].substring(0,1) == '+') ? document.getElementById("gchange").setAttribute("class", "pos-change") : document.getElementById("gchange").setAttribute("class", "neg-change")
             new Firebase("https://cse134bteam3-hw5.firebaseio.com").child("users").child((new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid).on("value", function(data){ 
@@ -296,8 +296,10 @@ var _rollbarConfig = {
                             + (total_priceG / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['GC.CMX']['changePercent'].substring(1, sync['GC.CMX']['changePercent'].length - 2))
                             + (total_priceP / (total_priceS + total_priceP + total_priceG)) *parseFloat(sync['PLM15.NYM']['changePercent'].substring(1, sync['PLM15.NYM']['changePercent'].length - 2));
                 }
-                overall_change = ((overall_change >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
+                overall_change = (((total_priceS + total_priceP + total_priceG) >= 0.0) ? '+' : '-').toString() + roundResults(overall_change, 3) + "%";
                 $("#overall-change").html(overall_change);
+                ((total_priceS + total_priceP + total_priceG) >= 0.0) ? $("#overall-change").attr("class", "pos-change") : $("#overall-change").attr("class", "neg-change");
+
             });
         }
         
