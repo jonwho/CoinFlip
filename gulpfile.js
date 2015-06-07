@@ -58,6 +58,18 @@ gulp.task('browser-sync', ['lint'], function() {
   gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
 });
 
+// lints files first then loads app to browser
+gulp.task('serve-dist', ['lint'], function() {
+  browserSync.init({
+    server: {
+      baseDir: './dist/'
+    }
+  });
+
+  // sync the browser when these files change
+  gulp.watch(['index.html', 'styles/**/*.css', 'scripts/**/*.js', 'views/**/*.html'], {cwd: './'}, reload);
+});
+
 // gulp with no args runs this task
 gulp.task('default', ['browser-sync']);
 
