@@ -6,7 +6,7 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 var reload = browserSync.reload;
 
 // build a css file of only used classes removing unused css classes
@@ -62,11 +62,11 @@ gulp.task('browser-sync', ['lint'], function() {
 gulp.task('default', ['browser-sync']);
 
 // delete the dist directory
-gulp.tast('clean-dist', function() {
-  rimraf.('./dist');
+gulp.task('clean-dist', function(cb) {
+  del(['dist'], cb);
 });
 
-gulp.task('build-index', function () {
+gulp.task('build-index', ['clean-dist'], function () {
   var assets = useref.assets();
   
   return gulp.src(['index.html'])
@@ -78,22 +78,22 @@ gulp.task('build-index', function () {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build-fonts', function () {
+gulp.task('build-fonts', ['clean-dist'], function () {
   return gulp.src('fonts/**/*')
     .pipe(gulp.dest('dist/fonts'));
 });
 
-gulp.task('build-assets', function () {
+gulp.task('build-assets', ['clean-dist'], function () {
   return gulp.src('assets/**/*')
     .pipe(gulp.dest('dist/assets'));
 });
 
-gulp.task('build-firebase', function () {
+gulp.task('build-firebase', ['clean-dist'], function () {
   return gulp.src('firebase.json')
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['clean-dist', 'build-index', 'build-fonts', 'build-assets'], function () {
+gulp.task('build', ['build-index', 'build-fonts', 'build-assets'], function () {
   var assets = useref.assets();
     
   return gulp.src(['views/**/*.html'])

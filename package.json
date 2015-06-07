@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.7.5",
+    "del": "^1.2.0",
     "gulp": "^3.8.11",
     "gulp-if": "^1.2.5",
     "gulp-jshint": "^1.11.0",
@@ -21,8 +22,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-uncss": "^1.0.1",
     "gulp-useref": "^1.2.0",
-    "jshint-stylish": "^2.0.0",
-    "rimraf": "^2.3.4"
+    "jshint-stylish": "^2.0.0"
   },
   "dependencies": {}
 }
