@@ -23,7 +23,7 @@ var fPlatinumRef = myFirebaseRef.child("platinum");
  * - username - optional field that defaults to UID. Specifies custom UID
  * - id - field specifying which coin to update for updates rather than
  *        sets
- */1
+ */
 function saveDataToFirebase(username, id) {
     if (username == "") { // If no username specified, default to UID
         username = (new Firebase("https://cse134bteam3-hw5.firebaseio.com")).getAuth().uid;
