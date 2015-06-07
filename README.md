@@ -4,15 +4,18 @@
 # Write up
 
 ## Improvements from HW4
-* Got saving coin stack to work in mobile view
-* Added Google auth
-* Added email/pass auth login
-* Added email/pass registration
-* Added coin/buillion pictures
-* Added types of coin/buillion
-* Added logout to nav
-* Added settings to sidebar
-* Able to change email or password of user if logged in with email/pass auth
+* Test subjects reported that a lack of knowledge of existing coins/bullions presented a formidable challenge towards building a portfolio effectively. 
+    * We populated a database of frequently traded coins and bullion bars and redesigned our creation/update page to be centered around these coins and bars
+    * Overhaul of update page resulted in it now dynamically loading default data into the fields based on the user-selected coin
+* Account management system
+    * We now support not only Facebook authentication, but Google+ and email/password combinations as well
+    * Implemented full account management capabilities - changing email, changing password, and password reset email functions
+* Build/Analytics
+    * Added Rollbar error tracking and Mixpanel action tracking to gathering information regarding our application’s performance
+    * Wrote build automation script to compile production release of application
+* UI/UX
+    * Implemented many fine tweaks to the CSS and layout in response to test subject feedback to improve aesthetics. For example, we moved the optional account management system to the left sidebar and replace it with the Logout button due to users finding the Logout functionality more worthy of the top-right corner real estate.
+
 
 
 ## For grading
